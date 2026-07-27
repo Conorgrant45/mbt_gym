@@ -1,0 +1,81 @@
+{
+  "agent_type": "return_mlp_ppo",
+  "run_tag": "david_smoke",
+  "finished_at": "2026-07-22T13:41:02",
+  "total_elapsed_seconds": 73.31592583656311,
+  "train_elapsed_seconds": 25.62460160255432,
+  "architecture": {
+    "actor_hidden_layers": [
+      64,
+      64
+    ],
+    "critic_hidden_layers": [
+      64,
+      64
+    ],
+    "actor_output_dim": 2,
+    "critic_output_dim": 1,
+    "activation_fn": "Tanh",
+    "total_parameters": 9029
+  },
+  "rollout_geometry": {
+    "n_steps": 4000,
+    "batch_size": 400,
+    "n_envs": 1,
+    "buffer_size": 4000,
+    "episode_length": 4000,
+    "rollouts_span_full_episode": true,
+    "n_minibatches_per_epoch": 10,
+    "n_gradient_updates_per_rollout": 100,
+    "n_rollouts_total": 5
+  },
+  "baseline_summary": {
+    "n_episodes": 5,
+    "mean_cumulative_reward": 43.41178635564809,
+    "std_cumulative_reward": 17.492071148535896,
+    "mean_raw_pnl": 43.63867185564801,
+    "mean_terminal_abs_inventory": 4.0,
+    "action_mean_bid": -0.0013641146916175898,
+    "action_mean_ask": 0.00044455308238310244,
+    "action_std_bid": 0.0014794772783780735,
+    "action_std_ask": 0.0010809061422841204,
+    "total_timesteps": 0,
+    "tag": "baseline_untrained"
+  },
+  "final_summary": {
+    "n_episodes": 5,
+    "mean_cumulative_reward": 30.341017382110664,
+    "std_cumulative_reward": 15.054339515880983,
+    "mean_raw_pnl": 30.424129882111448,
+    "mean_terminal_abs_inventory": 2.8,
+    "action_mean_bid": -0.03205677698526342,
+    "action_mean_ask": 0.06384516631716397,
+    "action_std_bid": 0.08051860876024827,
+    "action_std_ask": 0.04942984074530864,
+    "total_timesteps": 20000,
+    "tag": "final_post_training"
+  },
+  "reload_summary": {
+    "n_episodes": 5,
+    "mean_cumulative_reward": 30.341017382110664,
+    "std_cumulative_reward": 15.054339515880983,
+    "mean_raw_pnl": 30.424129882111448,
+    "mean_terminal_abs_inventory": 2.8,
+    "action_mean_bid": -0.03205677698526342,
+    "action_mean_ask": 0.06384516631716397,
+    "action_std_bid": 0.08051860876024827,
+    "action_std_ask": 0.04942984074530864
+  },
+  "improvement_over_baseline_mean_reward": -13.070768973537426,
+  "save_reload_equivalence_ok": true,
+  "max_action_diff_save_reload": 0.0,
+  "max_reward_diff_save_reload": 0.0,
+  "numerical_instability": [],
+  "final_training_metrics": {
+    "train/entropy_loss": -2.8303169631958007,
+    "train/policy_gradient_loss": -0.0005537928418113047,
+    "train/value_loss": 60.91349952697754,
+    "train/approx_kl": "0.0040305364",
+    "train/loss": 33.00153732299805
+  }
+}

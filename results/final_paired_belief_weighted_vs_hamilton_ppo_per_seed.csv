@@ -1,0 +1,6 @@
+agent_a,agent_b,metric,n,mean_diff,se,ci_lo,ci_hi,comparison_status,training_seed_a,training_seed_b
+belief_weighted,hamilton_ppo,full_objective,100,18.188983806583774,10.080059729528816,-1.567933263292705,37.94590087646026,exogenous_paired_fills_not_claimed_paired,,0
+belief_weighted,hamilton_ppo,full_objective,100,22.92795523277848,5.360793880082909,12.420799227815978,33.43511123774098,exogenous_paired_fills_not_claimed_paired,,1
+belief_weighted,hamilton_ppo,full_objective,100,19.142746275794828,5.189384040222667,8.9715535569584,29.313938994631258,exogenous_paired_fills_not_claimed_paired,,2
+belief_weighted,hamilton_ppo,full_objective,100,20.73223491564263,9.9785279144543,1.1743202033121989,40.29014962797306,exogenous_paired_fills_not_claimed_paired,,3
+belief_weighted,hamilton_ppo,full_objective,100,13.612550673325432,17.24745311086957,-20.19245742397893,47.41755877062979,exogenous_paired_fills_not_claimed_paired,,4

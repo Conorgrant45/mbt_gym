@@ -1,0 +1,99 @@
+{
+  "agent_type": "hamilton_ppo",
+  "run_tag": "offlinecv_env70000_learner_2",
+  "finished_at": "2026-07-25T22:48:33",
+  "total_elapsed_seconds": 611.2821431159973,
+  "train_elapsed_seconds": 524.2301888465881,
+  "learner_seed": 2,
+  "training_env_seed": 70000,
+  "architecture": {
+    "actor_hidden_layers": [
+      64,
+      64
+    ],
+    "critic_hidden_layers": [
+      64,
+      64
+    ],
+    "actor_output_dim": 2,
+    "critic_output_dim": 1,
+    "activation_fn": "Tanh",
+    "total_parameters": 9029
+  },
+  "rollout_geometry": {
+    "n_steps": 4000,
+    "batch_size": 400,
+    "n_envs": 1,
+    "buffer_size": 4000,
+    "episode_length": 4000,
+    "rollouts_span_full_episode": true,
+    "n_minibatches_per_epoch": 10,
+    "n_gradient_updates_per_rollout": 100,
+    "n_rollouts_total": 50
+  },
+  "baseline_summary": {
+    "n_episodes": 10,
+    "mean_cumulative_reward": 45.2773909244839,
+    "std_cumulative_reward": 22.132878289240356,
+    "mean_raw_pnl": 45.439257674484416,
+    "mean_terminal_abs_inventory": 3.6,
+    "action_mean_bid": 0.00033629709556140595,
+    "action_mean_ask": -0.0012295809744153302,
+    "action_std_bid": 0.000921717531362436,
+    "action_std_ask": 0.0012478053816731196,
+    "total_timesteps": 0,
+    "tag": "baseline_untrained"
+  },
+  "final_summary": {
+    "n_episodes": 10,
+    "mean_cumulative_reward": 21.847218418793737,
+    "std_cumulative_reward": 33.4857705242899,
+    "mean_raw_pnl": 22.12705941879374,
+    "mean_terminal_abs_inventory": 6.1,
+    "action_mean_bid": -0.14251875305879877,
+    "action_mean_ask": 0.05995048624069896,
+    "action_std_bid": 0.161708787620071,
+    "action_std_ask": 0.13767727108544858,
+    "total_timesteps": 200000,
+    "tag": "final_post_training"
+  },
+  "reload_summary": {
+    "n_episodes": 10,
+    "mean_cumulative_reward": 21.847218418793737,
+    "std_cumulative_reward": 33.4857705242899,
+    "mean_raw_pnl": 22.12705941879374,
+    "mean_terminal_abs_inventory": 6.1,
+    "action_mean_bid": -0.14251875305879877,
+    "action_mean_ask": 0.05995048624069896,
+    "action_std_bid": 0.161708787620071,
+    "action_std_ask": 0.13767727108544858
+  },
+  "improvement_over_baseline_mean_reward": -23.430172505690166,
+  "save_reload_equivalence_ok": true,
+  "max_action_diff_save_reload": 0.0,
+  "max_reward_diff_save_reload": 0.0,
+  "numerical_instability": [],
+  "final_training_metrics": {
+    "train/entropy_loss": -2.7265076422691346,
+    "train/policy_gradient_loss": -0.0012043618051648152,
+    "train/value_loss": 16.784724817276,
+    "train/approx_kl": "0.0035554704",
+    "train/loss": 9.607504844665527
+  },
+  "best_validation_mean_objective": 41.47131838623646,
+  "best_validation_std_objective": 15.478102481601168,
+  "best_validation_timestep": 64000,
+  "best_model_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\hamilton_ppo\\ppo_hamilton_ppo_offlinecv_env70000_learner_2_best.zip",
+  "validation_seeds": [
+    90001,
+    90002,
+    90003,
+    90004,
+    90005,
+    90006,
+    90007,
+    90008,
+    90009,
+    90010
+  ]
+}

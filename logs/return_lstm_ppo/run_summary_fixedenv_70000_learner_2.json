@@ -1,0 +1,104 @@
+{
+  "agent_type": "return_lstm_ppo",
+  "run_tag": "fixedenv_70000_learner_2",
+  "finished_at": "2026-07-24T23:45:36",
+  "total_elapsed_seconds": 1158.263748407364,
+  "train_elapsed_seconds": 1039.6756508350372,
+  "learner_seed": 2,
+  "training_env_seed": 70000,
+  "architecture": {
+    "actor_hidden_layers": [
+      64,
+      64
+    ],
+    "critic_hidden_layers": [
+      64,
+      64
+    ],
+    "actor_output_dim": 2,
+    "critic_output_dim": 1,
+    "activation_fn": "Tanh",
+    "total_parameters": 52165,
+    "lstm_hidden_size": 64,
+    "n_lstm_layers": 1,
+    "shared_lstm": false,
+    "enable_critic_lstm": true,
+    "critic_has_separate_lstm": true
+  },
+  "rollout_geometry": {
+    "n_steps": 4000,
+    "batch_size": 400,
+    "n_envs": 1,
+    "buffer_size": 4000,
+    "episode_length": 4000,
+    "rollouts_span_full_episode": true,
+    "n_minibatches_per_epoch": 10,
+    "n_gradient_updates_per_rollout": 100,
+    "n_rollouts_total": 50
+  },
+  "baseline_summary": {
+    "n_episodes": 10,
+    "mean_cumulative_reward": 44.885200905284556,
+    "std_cumulative_reward": 22.62397911928534,
+    "mean_raw_pnl": 45.038686405285105,
+    "mean_terminal_abs_inventory": 3.5,
+    "action_mean_bid": 0.0005528197049704886,
+    "action_mean_ask": -0.00010447674091427928,
+    "action_std_bid": 0.00045953721580260163,
+    "action_std_ask": 0.0003655088552923925,
+    "total_timesteps": 0,
+    "tag": "baseline_untrained"
+  },
+  "final_summary": {
+    "n_episodes": 10,
+    "mean_cumulative_reward": 48.43275411808331,
+    "std_cumulative_reward": 60.877586508637044,
+    "mean_raw_pnl": 49.88061611808364,
+    "mean_terminal_abs_inventory": 17.2,
+    "action_mean_bid": 0.38147514120489356,
+    "action_mean_ask": -0.22442687590047716,
+    "action_std_bid": 0.005928567761743076,
+    "action_std_ask": 0.002674723796896485,
+    "total_timesteps": 200000,
+    "tag": "final_post_training"
+  },
+  "reload_summary": {
+    "n_episodes": 10,
+    "mean_cumulative_reward": 48.43275411808331,
+    "std_cumulative_reward": 60.877586508637044,
+    "mean_raw_pnl": 49.88061611808364,
+    "mean_terminal_abs_inventory": 17.2,
+    "action_mean_bid": 0.38147514120489356,
+    "action_mean_ask": -0.22442687590047716,
+    "action_std_bid": 0.005928567761743076,
+    "action_std_ask": 0.002674723796896485
+  },
+  "improvement_over_baseline_mean_reward": 3.5475532127987535,
+  "save_reload_equivalence_ok": true,
+  "max_action_diff_save_reload": 0.0,
+  "max_reward_diff_save_reload": 0.0,
+  "numerical_instability": [],
+  "final_training_metrics": {
+    "train/entropy_loss": -2.6999028491973878,
+    "train/policy_gradient_loss": -0.0011224072912766126,
+    "train/value_loss": 73.64854353904724,
+    "train/approx_kl": "0.0042647477",
+    "train/loss": 77.27720642089844
+  },
+  "best_validation_mean_objective": 62.82176762176467,
+  "best_validation_std_objective": 85.5100224148695,
+  "best_validation_timestep": 160000,
+  "best_model_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_lstm_ppo\\ppo_return_lstm_ppo_fixedenv_70000_learner_2_best.zip",
+  "validation_seeds": [
+    90001,
+    90002,
+    90003,
+    90004,
+    90005,
+    90006,
+    90007,
+    90008,
+    90009,
+    90010
+  ]
+}

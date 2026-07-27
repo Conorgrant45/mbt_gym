@@ -1,0 +1,81 @@
+{
+  "agent_type": "hamilton_ppo",
+  "run_tag": "final_seed_1",
+  "finished_at": "2026-07-18T11:15:32",
+  "total_elapsed_seconds": 385.64028096199036,
+  "train_elapsed_seconds": 327.9301631450653,
+  "architecture": {
+    "actor_hidden_layers": [
+      64,
+      64
+    ],
+    "critic_hidden_layers": [
+      64,
+      64
+    ],
+    "actor_output_dim": 2,
+    "critic_output_dim": 1,
+    "activation_fn": "Tanh",
+    "total_parameters": 9029
+  },
+  "rollout_geometry": {
+    "n_steps": 4000,
+    "batch_size": 400,
+    "n_envs": 1,
+    "buffer_size": 4000,
+    "episode_length": 4000,
+    "rollouts_span_full_episode": true,
+    "n_minibatches_per_epoch": 10,
+    "n_gradient_updates_per_rollout": 100,
+    "n_rollouts_total": 50
+  },
+  "baseline_summary": {
+    "n_episodes": 5,
+    "mean_cumulative_reward": 43.210587342015444,
+    "std_cumulative_reward": 17.04705115842779,
+    "mean_raw_pnl": 43.45336184201574,
+    "mean_terminal_abs_inventory": 4.2,
+    "action_mean_bid": 0.0032865759868912162,
+    "action_mean_ask": 0.0032518816044550475,
+    "action_std_bid": 0.002165873609082277,
+    "action_std_ask": 0.0025124069739627833,
+    "total_timesteps": 0,
+    "tag": "baseline_untrained"
+  },
+  "final_summary": {
+    "n_episodes": 5,
+    "mean_cumulative_reward": 43.933650847878596,
+    "std_cumulative_reward": 29.148661406913806,
+    "mean_raw_pnl": 44.311045347876586,
+    "mean_terminal_abs_inventory": 8.2,
+    "action_mean_bid": 0.7850631374925375,
+    "action_mean_ask": 0.15973032640367746,
+    "action_std_bid": 0.2035987938616275,
+    "action_std_ask": 0.043249909041323566,
+    "total_timesteps": 200000,
+    "tag": "final_post_training"
+  },
+  "reload_summary": {
+    "n_episodes": 5,
+    "mean_cumulative_reward": 43.933650847878596,
+    "std_cumulative_reward": 29.148661406913806,
+    "mean_raw_pnl": 44.311045347876586,
+    "mean_terminal_abs_inventory": 8.2,
+    "action_mean_bid": 0.7850631374925375,
+    "action_mean_ask": 0.15973032640367746,
+    "action_std_bid": 0.2035987938616275,
+    "action_std_ask": 0.043249909041323566
+  },
+  "improvement_over_baseline_mean_reward": 0.723063505863152,
+  "save_reload_equivalence_ok": true,
+  "max_action_diff_save_reload": 0.0,
+  "max_reward_diff_save_reload": 0.0,
+  "numerical_instability": [],
+  "final_training_metrics": {
+    "train/entropy_loss": -2.7064641761779784,
+    "train/policy_gradient_loss": -0.000757888074353108,
+    "train/value_loss": 51.382296562194824,
+    "train/approx_kl": "0.0022623187",
+    "train/loss": 27.148948669433594
+  }
+}

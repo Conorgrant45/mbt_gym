@@ -1,0 +1,101 @@
+{
+  "agent_type": "return_mlp_ppo",
+  "run_tag": "offlinecv_env70000_learner_1",
+  "learner_seed": 1,
+  "training_env_seed": 70000,
+  "total_timesteps": 200000,
+  "checkpoint_frequency": 16000,
+  "checkpoints": [
+    {
+      "timestep": 16000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000016000.zip",
+      "saved_at": "2026-07-25T21:16:22",
+      "is_final": false,
+      "policy_hash": "fe986c8ec925c9c2427bd894549bb48775c8d6fc65bc2201ac91747ea5ba35ab"
+    },
+    {
+      "timestep": 32000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000032000.zip",
+      "saved_at": "2026-07-25T21:16:49",
+      "is_final": false,
+      "policy_hash": "89ee0605306d719943d9b7ee90b3a450d97d8b44c5a98ef9d56e51d71fcd77c2"
+    },
+    {
+      "timestep": 48000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000048000.zip",
+      "saved_at": "2026-07-25T21:17:16",
+      "is_final": false,
+      "policy_hash": "bf47621bdadff0f037a6f81648b0a3cb123a29075bd0d1d8040e671547b52e56"
+    },
+    {
+      "timestep": 64000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000064000.zip",
+      "saved_at": "2026-07-25T21:17:42",
+      "is_final": false,
+      "policy_hash": "2c77f00b66312915ed034a3a5eca8354e27a4abc77977fa721e884cd56d6466d"
+    },
+    {
+      "timestep": 80000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000080000.zip",
+      "saved_at": "2026-07-25T21:18:08",
+      "is_final": false,
+      "policy_hash": "ee1f692f51d221fe650e7d4b20d80b791bd59a7145ef331e0677a0eadd373ef2"
+    },
+    {
+      "timestep": 96000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000096000.zip",
+      "saved_at": "2026-07-25T21:18:36",
+      "is_final": false,
+      "policy_hash": "7e8526d2edc25e0afa465a8f625569fd5649ce2812a26829d6d312944ef814e2"
+    },
+    {
+      "timestep": 112000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000112000.zip",
+      "saved_at": "2026-07-25T21:19:03",
+      "is_final": false,
+      "policy_hash": "e45507e2b3106f3ffdd6b038e5dff9f62d297b12981acd234cc97a9d3f4e45c6"
+    },
+    {
+      "timestep": 128000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000128000.zip",
+      "saved_at": "2026-07-25T21:19:30",
+      "is_final": false,
+      "policy_hash": "70a7a2c36b147fb68cf7916b91936f184c2c3514e68d89ba575e65d1bb6b122e"
+    },
+    {
+      "timestep": 144000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000144000.zip",
+      "saved_at": "2026-07-25T21:19:56",
+      "is_final": false,
+      "policy_hash": "e639d93ef013f47e0f9e95b8ab2cfc787bf3a6609112f364decd251525ab8494"
+    },
+    {
+      "timestep": 160000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000160000.zip",
+      "saved_at": "2026-07-25T21:20:23",
+      "is_final": false,
+      "policy_hash": "ef65348d2d8c5ad7e2ffd207e8922ab659352b0d05aac671abe3684f18ec0588"
+    },
+    {
+      "timestep": 176000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000176000.zip",
+      "saved_at": "2026-07-25T21:20:49",
+      "is_final": false,
+      "policy_hash": "3e362f1e2846aea2621fc0034231199a2e05afe4d7c0a314ac170a67e05f4bbc"
+    },
+    {
+      "timestep": 192000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000192000.zip",
+      "saved_at": "2026-07-25T21:21:16",
+      "is_final": false,
+      "policy_hash": "89abf4ff7450c550240ecc957eb8dddf5f668f877a262424ff4cff9215b9d683"
+    },
+    {
+      "timestep": 200000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo\\checkpoints\\offlinecv_env70000_learner_1\\ppo_return_mlp_ppo_offlinecv_env70000_learner_1_t000200000.zip",
+      "saved_at": "2026-07-25T21:21:22",
+      "is_final": true,
+      "policy_hash": "ff240b96bcc273004d4a57d78d79af48cf9327748a2690cd5ce6b0ea01be3f9e"
+    }
+  ]
+}

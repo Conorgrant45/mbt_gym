@@ -1,0 +1,31 @@
+{
+  "agent_type": "return_lstm_ppo",
+  "run_tag": "smoke_lstm",
+  "learner_seed": 0,
+  "training_env_seed": 70000,
+  "total_timesteps": 1500,
+  "checkpoint_frequency": 500,
+  "checkpoints": [
+    {
+      "timestep": 500,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_lstm_ppo\\checkpoints\\smoke_lstm\\ppo_return_lstm_ppo_smoke_lstm_t000000500.zip",
+      "saved_at": "2026-07-25T18:10:19",
+      "is_final": false,
+      "policy_hash": "4f88d872622015630ecbc090ef600e3760ec0191aa29e7fb9d0429a9d6b0b175"
+    },
+    {
+      "timestep": 1000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_lstm_ppo\\checkpoints\\smoke_lstm\\ppo_return_lstm_ppo_smoke_lstm_t000001000.zip",
+      "saved_at": "2026-07-25T18:11:09",
+      "is_final": false,
+      "policy_hash": "61475625daa222d98c2532650bccff7590f9c7a6d43e7fa94ca6412210d72d3e"
+    },
+    {
+      "timestep": 1500,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_lstm_ppo\\checkpoints\\smoke_lstm\\ppo_return_lstm_ppo_smoke_lstm_t000001500.zip",
+      "saved_at": "2026-07-25T18:11:11",
+      "is_final": true,
+      "policy_hash": "5385e5f1e19b58ba02703356fb608b33c8bd4f40d43a382374764c0e294803f9"
+    }
+  ]
+}
