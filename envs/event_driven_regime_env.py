@@ -369,18 +369,34 @@ class EventDrivenRegimeSwitchingEnv(gym.Env):
         fill_bid = 0
         fill_ask = 0
         if event_type == "arrival":
+            # The fill-uniform draw happens UNCONDITIONALLY, before the
+            # max/min-inventory gate is even evaluated (Phase 2 fix -- see
+            # tests/test_event_driven_agent_integration.py::
+            # test_exogenous_rng_draws_are_action_independent). Gating the
+            # draw itself behind `not already_at_min`/`not already_at_max`
+            # (Python's `and` short-circuits) would let the CURRENT
+            # inventory -- which depends on the policy's own past actions --
+            # decide whether this iteration's rng.uniform() call happens at
+            # all, desynchronising the RNG stream for any two policies whose
+            # inventory paths diverge. This never manifested in Phase 1
+            # (max_inventory=10,000 is never reached at these economic
+            # scales), but is fixed unconditionally rather than left
+            # dormant, since Phase 2 requires proving the exogenous draw
+            # sequence is exactly action-independent.
             if arrival_side == "buy":
                 # Buy MO arrival can fill the agent's resting ASK.
-                already_at_min = self.inventory <= -self.max_inventory
                 fill_prob = np.exp(-self.kappa * ask_depth)
-                fill_ask = int((not already_at_min) and (self.rng.uniform() < fill_prob))
+                fill_uniform = self.rng.uniform()
+                already_at_min = self.inventory <= -self.max_inventory
+                fill_ask = int((not already_at_min) and (fill_uniform < fill_prob))
                 if regime_at_event == 1:
                     jump_increment = float(self.rng.exponential(self.epsilon))
             else:
                 # Sell MO arrival can fill the agent's resting BID.
-                already_at_max = self.inventory >= self.max_inventory
                 fill_prob = np.exp(-self.kappa * bid_depth)
-                fill_bid = int((not already_at_max) and (self.rng.uniform() < fill_prob))
+                fill_uniform = self.rng.uniform()
+                already_at_max = self.inventory >= self.max_inventory
+                fill_bid = int((not already_at_max) and (fill_uniform < fill_prob))
                 if regime_at_event == 1:
                     jump_increment = -float(self.rng.exponential(self.epsilon))
 

@@ -45,6 +45,7 @@ from sb3_contrib import RecurrentPPO
 
 from train_agents import (
     AGENT_TYPES, RECURRENT_AGENT_TYPES, DEFAULT_INVENTORY_SCALE,
+    ENVIRONMENT_TYPES, DEFAULT_ENVIRONMENT_TYPE,
     evaluate_policy, hash_policy_state_dict, get_dependency_versions,
 )
 from envs.return_ppo_wrapper import DEFAULT_RETURN_SCALE
@@ -64,15 +65,33 @@ def hash_file_bytes(path) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def load_manifest(agent_type: str, run_tag: str) -> dict:
-    manifest_path = LOGS_DIR / agent_type / f"checkpoint_manifest_{run_tag}.json"
+def agent_dir_name(agent_type: str, environment_type: str) -> str:
+    """Mirrors train_agents.py's main() path-resolution exactly: 'fixed'
+    (default) resolves to the EXACT same directory name that existed before
+    --environment-type was added (agent_type itself); 'event' resolves to a
+    separate namespace (agent_type + '_event')."""
+    return agent_type if environment_type == "fixed" else f"{agent_type}_event"
+
+
+def load_manifest(agent_type: str, run_tag: str, environment_type: str = DEFAULT_ENVIRONMENT_TYPE) -> dict:
+    manifest_path = LOGS_DIR / agent_dir_name(agent_type, environment_type) / f"checkpoint_manifest_{run_tag}.json"
     if not manifest_path.exists():
         raise FileNotFoundError(
             f"No checkpoint manifest found at {manifest_path} -- run train_agents.py with "
-            f"--save-all-checkpoints for agent-type={agent_type!r}, run-tag={run_tag!r} first."
+            f"--save-all-checkpoints for agent-type={agent_type!r}, run-tag={run_tag!r}, "
+            f"environment-type={environment_type!r} first."
         )
     with open(manifest_path) as f:
-        return json.load(f)
+        manifest = json.load(f)
+    manifest_environment_type = manifest.get("environment_type", "fixed")  # absent -> pre-Phase-2 manifest -> "fixed"
+    if manifest_environment_type != environment_type:
+        raise ValueError(
+            f"--environment-type={environment_type!r} does not match this checkpoint manifest's own "
+            f"environment_type={manifest_environment_type!r} for {agent_type}/{run_tag} -- refusing to "
+            f"select a {manifest_environment_type} checkpoint as though it were {environment_type}. "
+            f"(A fixed-step model can never be offline-selected for an event-driven run, or vice versa.)"
+        )
+    return manifest
 
 
 def verify_candidate_files_exist(manifest: dict):
@@ -92,8 +111,14 @@ def verify_candidate_files_exist(manifest: dict):
 def evaluate_all_candidates(manifest: dict, validation_seeds: list) -> tuple:
     """Evaluate every candidate checkpoint listed in the manifest,
     deterministically, on exactly the same validation_seeds. Returns
-    (checkpoint_rows, episode_rows)."""
+    (checkpoint_rows, episode_rows). environment_type is read from the
+    manifest itself (already verified to match --environment-type by
+    load_manifest) -- evaluate_policy is called with the SAME environment
+    type the checkpoints were trained under, so an event-driven checkpoint
+    is always evaluated with the event-driven environment/wrappers, never
+    the fixed-step ones."""
     agent_type = manifest["agent_type"]
+    environment_type = manifest.get("environment_type", "fixed")
     is_recurrent = agent_type in RECURRENT_AGENT_TYPES
     model_cls = RecurrentPPO if is_recurrent else PPO
 
@@ -103,14 +128,14 @@ def evaluate_all_candidates(manifest: dict, validation_seeds: list) -> tuple:
         model = model_cls.load(cand["path"])
         summary, records = evaluate_policy(
             model, agent_type, validation_seeds, DEFAULT_INVENTORY_SCALE, DEFAULT_RETURN_SCALE,
-            deterministic=True,
+            deterministic=True, environment_type=environment_type,
         )
         rewards = np.array([r["cumulative_reward"] for r in records])
         loss_rate = float((rewards < 0).mean())
         policy_hash = hash_policy_state_dict(model)
 
         checkpoint_rows.append(dict(
-            agent_type=agent_type, run_tag=manifest["run_tag"],
+            agent_type=agent_type, environment_type=environment_type, run_tag=manifest["run_tag"],
             learner_seed=manifest["learner_seed"], training_env_seed=manifest["training_env_seed"],
             checkpoint_timestep=cand["timestep"], checkpoint_path=cand["path"],
             n_validation_episodes=summary["n_episodes"],
@@ -166,6 +191,10 @@ def copy_and_verify(source_path, dest_path: Path, overwrite: bool) -> dict:
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--agent-type", type=str, required=True, choices=AGENT_TYPES)
+    p.add_argument("--environment-type", type=str, default=DEFAULT_ENVIRONMENT_TYPE, choices=ENVIRONMENT_TYPES,
+                    help="Must match the checkpoint manifest's own environment_type -- cross-checked in "
+                         "load_manifest(), which also resolves the correct models/<agent_type>[_event]/ and "
+                         "logs/<agent_type>[_event]/ directories for this value.")
     p.add_argument("--run-tag", type=str, required=True)
     p.add_argument("--learner-seed", type=int, required=True,
                     help="Must match the checkpoint manifest's own learner_seed -- cross-checked, not used "
@@ -186,7 +215,7 @@ def main():
     args = parse_args()
     t0 = time.time()
 
-    manifest = load_manifest(args.agent_type, args.run_tag)
+    manifest = load_manifest(args.agent_type, args.run_tag, environment_type=args.environment_type)
     if manifest["learner_seed"] != args.learner_seed:
         raise ValueError(
             f"--learner-seed={args.learner_seed} does not match the checkpoint manifest's own "
@@ -199,8 +228,9 @@ def main():
         )
     verify_candidate_files_exist(manifest)
 
-    offline_best_path = MODELS_DIR / args.agent_type / f"ppo_{args.agent_type}_{args.run_tag}_offline_best.zip"
-    selection_json_path = LOGS_DIR / args.agent_type / f"offline_selection_{args.run_tag}.json"
+    agent_dir = agent_dir_name(args.agent_type, args.environment_type)
+    offline_best_path = MODELS_DIR / agent_dir / f"ppo_{args.agent_type}_{args.run_tag}_offline_best.zip"
+    selection_json_path = LOGS_DIR / agent_dir / f"offline_selection_{args.run_tag}.json"
     if not args.overwrite_selection:
         existing = [p for p in (offline_best_path, selection_json_path) if p.exists()]
         if existing:
@@ -241,7 +271,7 @@ def main():
 
     selection_json_path.parent.mkdir(parents=True, exist_ok=True)
     selection_record = dict(
-        agent_type=args.agent_type, run_tag=args.run_tag,
+        agent_type=args.agent_type, environment_type=args.environment_type, run_tag=args.run_tag,
         learner_seed=args.learner_seed, training_env_seed=args.training_env_seed,
         selection_metric=args.selection_metric, tie_break_rule=TIE_BREAK_RULE,
         validation_seed_start=args.validation_seeds_start, validation_seed_count=args.validation_seeds_count,

@@ -285,7 +285,7 @@ def _fake_evaluate_policy_sequence(rewards):
     sequence, one per call -- deterministic, no real episode cost."""
     calls = {"n": 0}
 
-    def fake(model, agent_type, eval_seeds, inventory_scale, return_scale, deterministic=True):
+    def fake(model, agent_type, eval_seeds, inventory_scale, return_scale, deterministic=True, environment_type="fixed"):
         i = calls["n"]
         calls["n"] += 1
         reward = rewards[i]

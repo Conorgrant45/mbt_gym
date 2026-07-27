@@ -49,13 +49,30 @@ from sb3_contrib import RecurrentPPO
 
 from envs.hamilton_ppo_wrapper import HamiltonPPOWrapper, DEFAULT_INVENTORY_SCALE
 from envs.return_ppo_wrapper import ReturnPPOWrapper, DEFAULT_RETURN_SCALE
-from envs.make_envs import make_regime_envs, N_STEPS
+from envs.make_envs import make_regime_envs, N_STEPS, LAMBDA
 from mbt_gym.gym.index_names import CASH_INDEX, INVENTORY_INDEX, ASSET_PRICE_INDEX
+
+# Event-driven counterparts (Phase 2). Imported unconditionally but only
+# EVER constructed when --environment-type event is explicitly selected --
+# importing them does not change any fixed-step behaviour.
+from envs.event_driven_regime_env import EventDrivenRegimeSwitchingEnv
+from envs.event_driven_hamilton_ppo_wrapper import EventDrivenHamiltonPPOWrapper
+from envs.event_driven_return_ppo_wrapper import EventDrivenReturnPPOWrapper
 
 REPO_ROOT = Path(__file__).resolve().parent
 
 AGENT_TYPES = ("hamilton_ppo", "return_mlp_ppo", "return_lstm_ppo")
 RECURRENT_AGENT_TYPES = ("return_lstm_ppo",)
+
+# ----------------------------------------------------------------------
+# Environment-type selection (Phase 2). Default "fixed" preserves every
+# existing script/test's behaviour exactly -- "event" is opt-in only, never
+# inferred. Model/log/result paths are kept in SEPARATE namespaces per
+# environment type (see main()'s output_dir/log_dir resolution) so an
+# event-driven run can never overwrite a fixed-step checkpoint or vice versa.
+# ----------------------------------------------------------------------
+ENVIRONMENT_TYPES = ("fixed", "event")
+DEFAULT_ENVIRONMENT_TYPE = "fixed"
 
 # ----------------------------------------------------------------------
 # DEFAULTS
@@ -115,39 +132,110 @@ RECONCILIATION_TOL = 1e-6
 # Environment construction (single source per agent type -- no
 # duplicated make_regime_envs()/wrapper-construction logic)
 # ======================================================================
-def build_train_env(agent_type: str, seed: int, inventory_scale: float, return_scale: float):
-    if agent_type == "hamilton_ppo":
-        return HamiltonPPOWrapper(inventory_scale=inventory_scale, seed=seed)
-    elif agent_type in ("return_mlp_ppo", "return_lstm_ppo"):
-        return ReturnPPOWrapper(inventory_scale=inventory_scale, return_scale=return_scale, seed=seed)
-    raise ValueError(f"Unknown agent_type: {agent_type!r} (expected one of {AGENT_TYPES})")
+def _check_environment_type(environment_type: str):
+    if environment_type not in ENVIRONMENT_TYPES:
+        raise ValueError(f"environment_type must be one of {ENVIRONMENT_TYPES}, got {environment_type!r}")
 
 
-def build_eval_env(agent_type: str, seed: int, inventory_scale: float, return_scale: float):
+def build_train_env(agent_type: str, seed: int, inventory_scale: float, return_scale: float,
+                     environment_type: str = DEFAULT_ENVIRONMENT_TYPE):
+    _check_environment_type(environment_type)
+    if environment_type == "fixed":
+        if agent_type == "hamilton_ppo":
+            return HamiltonPPOWrapper(inventory_scale=inventory_scale, seed=seed)
+        elif agent_type in ("return_mlp_ppo", "return_lstm_ppo"):
+            return ReturnPPOWrapper(inventory_scale=inventory_scale, return_scale=return_scale, seed=seed)
+        raise ValueError(f"Unknown agent_type: {agent_type!r} (expected one of {AGENT_TYPES})")
+    else:  # "event"
+        if agent_type == "hamilton_ppo":
+            return EventDrivenHamiltonPPOWrapper(inventory_scale=inventory_scale, seed=seed)
+        elif agent_type in ("return_mlp_ppo", "return_lstm_ppo"):
+            return EventDrivenReturnPPOWrapper(inventory_scale=inventory_scale, return_scale=return_scale, seed=seed)
+        raise ValueError(f"Unknown agent_type: {agent_type!r} (expected one of {AGENT_TYPES})")
+
+
+def build_eval_env(agent_type: str, seed: int, inventory_scale: float, return_scale: float,
+                    environment_type: str = DEFAULT_ENVIRONMENT_TYPE):
     """A FRESH base_env + wrapper for this one episode -- never reuse an
     already-stepped wrapper via reset(seed=s) for reproducibility (see
-    tests/test_hamilton_ppo_wrapper.py's TestSeedReset for why)."""
-    base_env = make_regime_envs(switch_within_episode=True, seed=seed)
-    if agent_type == "hamilton_ppo":
-        wrapper = HamiltonPPOWrapper(base_env=base_env, inventory_scale=inventory_scale)
-    elif agent_type in ("return_mlp_ppo", "return_lstm_ppo"):
-        wrapper = ReturnPPOWrapper(base_env=base_env, inventory_scale=inventory_scale, return_scale=return_scale)
-    else:
-        raise ValueError(f"Unknown agent_type: {agent_type!r}")
-    return wrapper
+    tests/test_hamilton_ppo_wrapper.py's TestSeedReset for why -- the same
+    convention holds for the event-driven wrappers, which likewise never
+    reseed anything on an already-constructed instance)."""
+    _check_environment_type(environment_type)
+    if environment_type == "fixed":
+        base_env = make_regime_envs(switch_within_episode=True, seed=seed)
+        if agent_type == "hamilton_ppo":
+            wrapper = HamiltonPPOWrapper(base_env=base_env, inventory_scale=inventory_scale)
+        elif agent_type in ("return_mlp_ppo", "return_lstm_ppo"):
+            wrapper = ReturnPPOWrapper(base_env=base_env, inventory_scale=inventory_scale, return_scale=return_scale)
+        else:
+            raise ValueError(f"Unknown agent_type: {agent_type!r}")
+        return wrapper
+    else:  # "event"
+        base_env = EventDrivenRegimeSwitchingEnv(seed=seed)
+        if agent_type == "hamilton_ppo":
+            wrapper = EventDrivenHamiltonPPOWrapper(base_env=base_env, inventory_scale=inventory_scale)
+        elif agent_type in ("return_mlp_ppo", "return_lstm_ppo"):
+            wrapper = EventDrivenReturnPPOWrapper(
+                base_env=base_env, inventory_scale=inventory_scale, return_scale=return_scale,
+            )
+        else:
+            raise ValueError(f"Unknown agent_type: {agent_type!r}")
+        return wrapper
 
 
-def make_train_env_fn(agent_type: str, inventory_scale: float, return_scale: float, seed: int):
+def make_train_env_fn(agent_type: str, inventory_scale: float, return_scale: float, seed: int,
+                       environment_type: str = DEFAULT_ENVIRONMENT_TYPE):
     def _init():
-        env = build_train_env(agent_type, seed, inventory_scale, return_scale)
+        env = build_train_env(agent_type, seed, inventory_scale, return_scale, environment_type=environment_type)
         return Monitor(env)
     return _init
+
+
+class RunningStats:
+    """Incremental (no full-trajectory-storage) mean/std accumulator for a
+    fixed-width vector quantity (e.g. per-step actions), used by the
+    event-driven evaluation path so memory does not grow with the number of
+    evaluated timesteps -- see run_eval_episode's environment_type='event'
+    branch and evaluate_agents_common.py's event-driven runners.
+    Numerically equivalent to storing every sample and calling
+    .mean()/.std() on the concatenated array (verified in
+    tests/test_event_driven_agent_integration.py)."""
+
+    def __init__(self, width: int):
+        self.width = width
+        self.count = 0
+        self.sum = np.zeros(width, dtype=np.float64)
+        self.sumsq = np.zeros(width, dtype=np.float64)
+
+    def add(self, x: np.ndarray):
+        x = np.asarray(x, dtype=np.float64).reshape(self.width)
+        self.count += 1
+        self.sum += x
+        self.sumsq += x ** 2
+
+    @property
+    def mean(self) -> np.ndarray:
+        return self.sum / self.count
+
+    @property
+    def std(self) -> np.ndarray:
+        var = np.maximum(self.sumsq / self.count - self.mean ** 2, 0.0)
+        return np.sqrt(var)
+
+    def merge(self, other: "RunningStats") -> "RunningStats":
+        merged = RunningStats(self.width)
+        merged.count = self.count + other.count
+        merged.sum = self.sum + other.sum
+        merged.sumsq = self.sumsq + other.sumsq
+        return merged
 
 
 # ======================================================================
 # Recurrent-aware single-episode evaluation
 # ======================================================================
-def run_eval_episode(model, env, seed: int, is_recurrent: bool, deterministic: bool = True) -> dict:
+def run_eval_episode(model, env, seed: int, is_recurrent: bool, deterministic: bool = True,
+                      environment_type: str = DEFAULT_ENVIRONMENT_TYPE) -> dict:
     """
     Run one full episode to completion with deterministic actions.
     Recurrent-aware: carries LSTM hidden/cell state across steps within
@@ -167,7 +255,20 @@ def run_eval_episode(model, env, seed: int, is_recurrent: bool, deterministic: b
     making baseline/final/reload evaluations on "the same seed"
     silently non-reproducible -- exactly the bug this reset(seed=...)
     call fixes (caught by the save/reload equivalence check during Phase 2
-    smoke testing).
+    smoke testing). The event-driven wrappers accept the same seed= kwarg
+    for Gymnasium-API compatibility and likewise ignore it (their seeding is
+    fully resolved at construction, in build_eval_env) -- calling
+    reset(seed=seed) is therefore harmless and kept identical across both
+    environment types rather than branching on it.
+
+    For environment_type="event", episode length is a random variable (no
+    fixed N_STEPS to assert against -- see evaluate_policy's caller-side
+    check), and per-step actions are accumulated INCREMENTALLY via
+    RunningStats rather than stored in a growing list, so evaluating many
+    (long) event-driven episodes does not scale memory with total evaluated
+    timesteps (Phase 2 requirement). The fixed-step path's exact prior
+    behaviour (storing the full per-step actions array) is left completely
+    unchanged.
     """
     obs, info = env.reset(seed=seed)
     cash_0 = env.base_env.raw_cash
@@ -178,7 +279,8 @@ def run_eval_episode(model, env, seed: int, is_recurrent: bool, deterministic: b
     episode_start = np.array([True], dtype=bool)
 
     cumulative_reward = 0.0
-    actions_taken = []
+    action_stats = RunningStats(width=2) if environment_type == "event" else None
+    actions_taken = [] if environment_type != "event" else None
     n_steps = 0
     terminated = truncated = False
     info = None
@@ -189,7 +291,11 @@ def run_eval_episode(model, env, seed: int, is_recurrent: bool, deterministic: b
             )
         else:
             action, _ = model.predict(obs, deterministic=deterministic)
-        actions_taken.append(np.asarray(action, dtype=np.float64).copy())
+        action_arr = np.asarray(action, dtype=np.float64)
+        if environment_type == "event":
+            action_stats.add(action_arr)
+        else:
+            actions_taken.append(action_arr.copy())
 
         obs, reward, terminated, truncated, info = env.step(action)
         cumulative_reward += float(reward)
@@ -201,30 +307,53 @@ def run_eval_episode(model, env, seed: int, is_recurrent: bool, deterministic: b
     mid_T = float(info["raw_state"][ASSET_PRICE_INDEX])
     raw_pnl = (cash_T + inv_T * mid_T) - (cash_0 + inv_0 * mid_0)
 
-    return dict(
+    result = dict(
         steps=n_steps,
         cumulative_reward=cumulative_reward,
         raw_pnl=raw_pnl,
         terminal_abs_inventory=abs(inv_T),
-        actions=np.array(actions_taken),
     )
+    if environment_type == "event":
+        result["action_stats"] = action_stats
+        result["final_event_type"] = info["event_type"]
+    else:
+        result["actions"] = np.array(actions_taken)
+    return result
 
 
 def evaluate_policy(model, agent_type: str, eval_seeds, inventory_scale: float, return_scale: float,
-                     deterministic: bool = True):
+                     deterministic: bool = True, environment_type: str = DEFAULT_ENVIRONMENT_TYPE):
+    _check_environment_type(environment_type)
     is_recurrent = agent_type in RECURRENT_AGENT_TYPES
     records = []
     for seed in eval_seeds:
-        env = build_eval_env(agent_type, seed, inventory_scale, return_scale)
-        r = run_eval_episode(model, env, seed, is_recurrent, deterministic)
-        assert r["steps"] == N_STEPS, f"eval episode (seed={seed}) did not run the full {N_STEPS} steps"
+        env = build_eval_env(agent_type, seed, inventory_scale, return_scale, environment_type=environment_type)
+        r = run_eval_episode(model, env, seed, is_recurrent, deterministic, environment_type=environment_type)
+        if environment_type == "fixed":
+            assert r["steps"] == N_STEPS, f"eval episode (seed={seed}) did not run the full {N_STEPS} steps"
+        else:
+            assert r["final_event_type"] == "terminal", (
+                f"event-driven eval episode (seed={seed}) did not end on a terminal event "
+                f"(got {r['final_event_type']!r}) -- episode length is variable, but every episode "
+                f"must still reach the horizon."
+            )
         r["seed"] = seed
         records.append(r)
 
     rewards = np.array([r["cumulative_reward"] for r in records])
     pnls = np.array([r["raw_pnl"] for r in records])
     term_invs = np.array([r["terminal_abs_inventory"] for r in records])
-    all_actions = np.concatenate([r["actions"] for r in records], axis=0)
+
+    if environment_type == "fixed":
+        all_actions = np.concatenate([r["actions"] for r in records], axis=0)
+        action_mean = all_actions.mean(axis=0)
+        action_std = all_actions.std(axis=0)
+    else:
+        pooled = records[0]["action_stats"]
+        for r in records[1:]:
+            pooled = pooled.merge(r["action_stats"])
+        action_mean = pooled.mean
+        action_std = pooled.std
 
     summary = dict(
         n_episodes=len(records),
@@ -232,10 +361,11 @@ def evaluate_policy(model, agent_type: str, eval_seeds, inventory_scale: float, 
         std_cumulative_reward=float(rewards.std()),
         mean_raw_pnl=float(pnls.mean()),
         mean_terminal_abs_inventory=float(term_invs.mean()),
-        action_mean_bid=float(all_actions[:, 0].mean()),
-        action_mean_ask=float(all_actions[:, 1].mean()),
-        action_std_bid=float(all_actions[:, 0].std()),
-        action_std_ask=float(all_actions[:, 1].std()),
+        action_mean_bid=float(action_mean[0]),
+        action_mean_ask=float(action_mean[1]),
+        action_std_bid=float(action_std[0]),
+        action_std_ask=float(action_std[1]),
+        mean_episode_length=float(np.mean([r["steps"] for r in records])),
     )
     return summary, records
 
@@ -309,7 +439,7 @@ class PeriodicEvalCallback(BaseCallback):
     def __init__(self, agent_type, eval_seeds, inventory_scale, return_scale, eval_freq,
                  training_curve: list, verbose: int = 1, best_model_path: str = None,
                  checkpoints_dir=None, run_tag: str = None, overwrite_checkpoints: bool = False,
-                 checkpoint_manifest: list = None):
+                 checkpoint_manifest: list = None, environment_type: str = DEFAULT_ENVIRONMENT_TYPE):
         super().__init__(verbose)
         self.agent_type = agent_type
         self.eval_seeds = eval_seeds
@@ -318,6 +448,7 @@ class PeriodicEvalCallback(BaseCallback):
         self.eval_freq = eval_freq
         self.training_curve = training_curve
         self.best_model_path = best_model_path
+        self.environment_type = environment_type
         self._last_eval_step = 0
 
         self.checkpoints_dir = checkpoints_dir
@@ -346,7 +477,7 @@ class PeriodicEvalCallback(BaseCallback):
     def _run_eval(self, completed_timesteps: int):
         summary, _ = evaluate_policy(
             self.model, self.agent_type, self.eval_seeds, self.inventory_scale, self.return_scale,
-            deterministic=True,
+            deterministic=True, environment_type=self.environment_type,
         )
         # completed_timesteps: environment samples whose associated PPO
         # training update(s) have actually finished by the time this
@@ -453,6 +584,13 @@ def hash_policy_state_dict(model) -> str:
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--agent-type", type=str, required=True, choices=AGENT_TYPES)
+    p.add_argument("--environment-type", type=str, default=DEFAULT_ENVIRONMENT_TYPE, choices=ENVIRONMENT_TYPES,
+                    help="'fixed' (default, preserves all prior behaviour exactly) uses the 4,000-fixed-step "
+                         "RegimeSwitchingEnv. 'event' uses EventDrivenRegimeSwitchingEnv (Phase 2): decisions "
+                         "only at observable market-order arrivals, variable episode length "
+                         "(~280 events/episode in expectation, not 4000 steps). Model/log/result paths are "
+                         "kept in a separate namespace for 'event' (see output_dir/log_dir resolution in "
+                         "main()) so an event-driven run can never overwrite a fixed-step checkpoint.")
     p.add_argument("--seed", type=int, default=None,
                     help="[Retained for backwards compatibility] Used as BOTH --learner-seed and "
                          "--env-seed when neither is given explicitly -- see resolve_seeds(). Prefer "
@@ -663,8 +801,16 @@ def main():
     t_run_start = time.time()
     is_recurrent = args.agent_type in RECURRENT_AGENT_TYPES
 
-    output_dir = Path(args.output_dir) if args.output_dir else REPO_ROOT / "models" / args.agent_type
-    log_dir = Path(args.log_dir) if args.log_dir else REPO_ROOT / "logs" / args.agent_type
+    # Environment-type-separated model/log directories: "fixed" (default)
+    # resolves to EXACTLY the same paths as before this option existed
+    # (models/<agent_type>/, logs/<agent_type>/) -- zero behaviour change
+    # for any existing script/run-tag. "event" resolves to a distinct
+    # namespace (models/<agent_type>_event/, logs/<agent_type>_event/) so no
+    # event-driven run can ever overwrite a fixed-step checkpoint, manifest
+    # or run-summary, or vice versa, even under an identical --run-tag.
+    agent_dir_name = args.agent_type if args.environment_type == "fixed" else f"{args.agent_type}_event"
+    output_dir = Path(args.output_dir) if args.output_dir else REPO_ROOT / "models" / agent_dir_name
+    log_dir = Path(args.log_dir) if args.log_dir else REPO_ROOT / "logs" / agent_dir_name
     model_path = args.model_path or str(output_dir / f"ppo_{args.agent_type}_{args.run_tag}")
     output_dir.mkdir(parents=True, exist_ok=True)
     log_dir.mkdir(parents=True, exist_ok=True)
@@ -718,7 +864,10 @@ def main():
     # construction is intentionally ordered after this call to make that
     # independence obvious, not because it is load-bearing.
     np.random.seed(learner_seed)
-    vec_env = DummyVecEnv([make_train_env_fn(args.agent_type, args.inventory_scale, args.return_scale, env_seed)])
+    vec_env = DummyVecEnv([make_train_env_fn(
+        args.agent_type, args.inventory_scale, args.return_scale, env_seed,
+        environment_type=args.environment_type,
+    )])
     action_low = np.asarray(vec_env.action_space.low, dtype=np.float64)
     action_high = np.asarray(vec_env.action_space.high, dtype=np.float64)
 
@@ -756,23 +905,51 @@ def main():
 
     n_envs = vec_env.num_envs
     n_minibatches = (n_steps * n_envs) // batch_size
-    rollout_geometry = dict(
-        n_steps=n_steps,
-        batch_size=batch_size,
-        n_envs=n_envs,
-        buffer_size=n_steps * n_envs,
-        episode_length=N_STEPS,
-        rollouts_span_full_episode=rollout_spans_full_episode(n_steps, N_STEPS),
-        n_minibatches_per_epoch=n_minibatches,
-        n_gradient_updates_per_rollout=n_minibatches * args.n_epochs,
-        n_rollouts_total=args.total_timesteps // n_steps,
-    )
+    if args.environment_type == "fixed":
+        rollout_geometry = dict(
+            environment_type="fixed",
+            n_steps=n_steps,
+            batch_size=batch_size,
+            n_envs=n_envs,
+            buffer_size=n_steps * n_envs,
+            episode_length=N_STEPS,
+            rollouts_span_full_episode=rollout_spans_full_episode(n_steps, N_STEPS),
+            n_minibatches_per_epoch=n_minibatches,
+            n_gradient_updates_per_rollout=n_minibatches * args.n_epochs,
+            n_rollouts_total=args.total_timesteps // n_steps,
+        )
+    else:
+        # Event-driven episode length is a random variable (no fixed
+        # N_STEPS) -- one rollout buffer of n_steps TRANSITIONS therefore
+        # spans SEVERAL complete event-driven episodes (mean ~280
+        # transitions/episode at the production arrival rate), not one
+        # episode as in the fixed-step case. This is stated explicitly,
+        # not glossed over: the training GEOMETRY has genuinely changed,
+        # even though n_steps/batch_size/n_epochs are numerically unchanged
+        # from the fixed-step defaults for this initial integration.
+        mean_transitions_per_episode = 2 * LAMBDA  # see envs/event_driven_regime_env.py
+        rollout_geometry = dict(
+            environment_type="event",
+            n_steps=n_steps,
+            batch_size=batch_size,
+            n_envs=n_envs,
+            buffer_size=n_steps * n_envs,
+            episode_length="variable (no fixed step count -- see mean_transitions_per_episode)",
+            mean_transitions_per_episode=mean_transitions_per_episode,
+            approx_episodes_per_rollout=n_steps / mean_transitions_per_episode,
+            rollouts_span_full_episode=False,
+            rollouts_span_multiple_episodes=True,
+            n_minibatches_per_epoch=n_minibatches,
+            n_gradient_updates_per_rollout=n_minibatches * args.n_epochs,
+            n_rollouts_total=args.total_timesteps // n_steps,
+        )
     print("\nRollout geometry:")
     for k, v in rollout_geometry.items():
         print(f"  {k} = {v}")
 
     run_config = dict(
         agent_type=args.agent_type,
+        environment_type=args.environment_type,
         run_tag=args.run_tag,
         started_at=time.strftime("%Y-%m-%dT%H:%M:%S"),
         cli_args=vars(args),
@@ -802,6 +979,7 @@ def main():
     training_curve = []
     baseline_summary, _ = evaluate_policy(
         model, args.agent_type, args.eval_seeds, args.inventory_scale, args.return_scale, deterministic=True,
+        environment_type=args.environment_type,
     )
     baseline_summary["total_timesteps"] = 0
     baseline_summary["tag"] = "baseline_untrained"
@@ -823,6 +1001,7 @@ def main():
         checkpoints_dir=(checkpoints_dir if args.save_all_checkpoints else None),
         run_tag=args.run_tag, overwrite_checkpoints=args.overwrite_checkpoints,
         checkpoint_manifest=checkpoint_manifest_entries,
+        environment_type=args.environment_type,
     )
     callbacks = [eval_callback]
     if args.checkpoint_frequency > 0:
@@ -879,6 +1058,7 @@ def main():
 
         checkpoint_manifest = dict(
             agent_type=args.agent_type,
+            environment_type=args.environment_type,
             run_tag=args.run_tag,
             learner_seed=learner_seed,
             training_env_seed=env_seed,
@@ -895,6 +1075,7 @@ def main():
     print("\nRunning final post-training evaluation on fixed eval seeds...")
     final_summary, final_records = evaluate_policy(
         model, args.agent_type, args.eval_seeds, args.inventory_scale, args.return_scale, deterministic=True,
+        environment_type=args.environment_type,
     )
     final_summary["total_timesteps"] = args.total_timesteps
     final_summary["tag"] = "final_post_training"
@@ -915,6 +1096,7 @@ def main():
 
     reload_summary, reload_records = evaluate_policy(
         loaded_model, args.agent_type, args.eval_seeds, args.inventory_scale, args.return_scale, deterministic=True,
+        environment_type=args.environment_type,
     )
 
     equivalence_ok = True
@@ -922,7 +1104,22 @@ def main():
     max_reward_diff = 0.0
     for r_final, r_reload in zip(final_records, reload_records):
         assert r_final["seed"] == r_reload["seed"]
-        action_diff = float(np.max(np.abs(r_final["actions"] - r_reload["actions"])))
+        if args.environment_type == "fixed":
+            action_diff = float(np.max(np.abs(r_final["actions"] - r_reload["actions"])))
+        else:
+            # Event-driven records carry incremental action_stats (mean/std),
+            # not the full per-step array (see run_eval_episode) -- compare
+            # those aggregate statistics instead. Combined with reward_diff
+            # (an exact, highly sensitive function of the ENTIRE action
+            # sequence through fills/cash/inventory), this still detects any
+            # behavioural difference between the two models: two different
+            # deterministic policies could coincidentally match on
+            # cumulative_reward alone but would need to also match on both
+            # action moments to pass this combined check.
+            action_diff = float(max(
+                np.max(np.abs(r_final["action_stats"].mean - r_reload["action_stats"].mean)),
+                np.max(np.abs(r_final["action_stats"].std - r_reload["action_stats"].std)),
+            ))
         reward_diff = abs(r_final["cumulative_reward"] - r_reload["cumulative_reward"])
         max_action_diff = max(max_action_diff, action_diff)
         max_reward_diff = max(max_reward_diff, reward_diff)
@@ -946,7 +1143,7 @@ def main():
     per_episode_rows = []
     for tag, records in (("final_post_training", final_records), ("reloaded_model", reload_records)):
         for r in records:
-            row = {k: v for k, v in r.items() if k != "actions"}
+            row = {k: v for k, v in r.items() if k not in ("actions", "action_stats")}
             row["tag"] = tag
             per_episode_rows.append(row)
     per_episode_df = pd.DataFrame(per_episode_rows)
@@ -959,6 +1156,7 @@ def main():
     total_elapsed = time.time() - t_run_start
     run_summary = dict(
         agent_type=args.agent_type,
+        environment_type=args.environment_type,
         run_tag=args.run_tag,
         finished_at=time.strftime("%Y-%m-%dT%H:%M:%S"),
         total_elapsed_seconds=total_elapsed,

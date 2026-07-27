@@ -1,0 +1,25 @@
+{
+  "agent_type": "return_lstm_ppo",
+  "environment_type": "event",
+  "run_tag": "phase2_smoke_lstm",
+  "learner_seed": 0,
+  "training_env_seed": 70600,
+  "total_timesteps": 16000,
+  "checkpoint_frequency": 8000,
+  "checkpoints": [
+    {
+      "timestep": 8000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_lstm_ppo_event\\checkpoints\\phase2_smoke_lstm\\ppo_return_lstm_ppo_phase2_smoke_lstm_t000008000.zip",
+      "saved_at": "2026-07-27T13:39:08",
+      "is_final": false,
+      "policy_hash": "0d26f8807d1dc442466336c9a1e7b5d53a7917591dc5d92e223cb93cb32a5389"
+    },
+    {
+      "timestep": 16000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_lstm_ppo_event\\checkpoints\\phase2_smoke_lstm\\ppo_return_lstm_ppo_phase2_smoke_lstm_t000016000.zip",
+      "saved_at": "2026-07-27T13:40:32",
+      "is_final": true,
+      "policy_hash": "af8f96e85cfd8587728d84434e6fb24e25834a96d3f6a86f5702e1dcbcdf29b8"
+    }
+  ]
+}
