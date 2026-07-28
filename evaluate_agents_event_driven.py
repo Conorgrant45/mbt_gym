@@ -160,7 +160,28 @@ def run_event_analytic_agent_episode(agent_type: str, controls: dict, seed: int)
     done = False
     info = None
     while not done:
-        inv_sc = q / SBW.INV_UNIT
+        # BUG FIX (found during Phase 3 analysis): SBW.INV_UNIT (1/10000) exists
+        # to convert the FIXED-STEP environment's NORMALISED observation
+        # component (obs_flat[1], which TradingEnvironment scales to
+        # raw_inventory/10000 via its own normalise_observation_space=True)
+        # back to raw share units -- see evaluate_agents_common.py's/
+        # compare_four_policies_paired.py's/simulate_belief_weighted.py's own
+        # identical "inventory = obs_flat[1]; inv_sc = inventory / INV_UNIT"
+        # pattern. `q` here is EventDrivenRegimeSwitchingEnv's own raw_inventory
+        # property, which was NEVER normalised in the first place (Phase 1's
+        # environment returns raw state directly) -- dividing it by INV_UNIT
+        # again inflated it by a further 10000x (e.g. 0.5 shares -> inv_sc=5000),
+        # which SBW.get_control's grid clipping (q_ask/q_bid range roughly
+        # [-50, 50]) then saturated to the boundary for almost any nonzero
+        # inventory, regardless of its true magnitude. This made the oracle/
+        # belief-weighted/randomised event-driven analytic benchmarks quote a
+        # near-permanent, wildly asymmetric extreme-inventory control instead
+        # of the intended smooth CJ inventory skew -- confirmed by comparing
+        # get_control's output before/after this fix at raw_inv=0.5/1.0/2.0/-1.0
+        # (see event_driven_phase3_results.md for the numeric before/after).
+        # `q` is already in the correct (raw share) units get_control expects;
+        # no further scaling is applied.
+        inv_sc = q
 
         if policy == "oracle":
             regime = env.current_regime  # privileged -- the regime-conditioned benchmark's whole point

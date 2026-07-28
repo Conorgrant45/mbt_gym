@@ -1,0 +1,25 @@
+{
+  "agent_type": "hamilton_ppo",
+  "environment_type": "event",
+  "run_tag": "phase3_pilot_hamilton_ppo",
+  "learner_seed": 0,
+  "training_env_seed": 70000,
+  "total_timesteps": 16000,
+  "checkpoint_frequency": 8000,
+  "checkpoints": [
+    {
+      "timestep": 8000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\hamilton_ppo_event\\checkpoints\\phase3_pilot_hamilton_ppo\\ppo_hamilton_ppo_phase3_pilot_hamilton_ppo_t000008000.zip",
+      "saved_at": "2026-07-27T14:49:50",
+      "is_final": false,
+      "policy_hash": "f2f5c5295c5f94a81b3acd52089b73c9f42806f8567d0c90c15b2abf1f09f9ef"
+    },
+    {
+      "timestep": 16000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\hamilton_ppo_event\\checkpoints\\phase3_pilot_hamilton_ppo\\ppo_hamilton_ppo_phase3_pilot_hamilton_ppo_t000016000.zip",
+      "saved_at": "2026-07-27T14:49:59",
+      "is_final": true,
+      "policy_hash": "3fd15a6d7a085296329823440d5bdf258db8a38410eb302db9e5b689cd8851b0"
+    }
+  ]
+}

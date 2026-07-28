@@ -223,6 +223,26 @@ z=-1.31, fills z=-0.71 — no flag (threshold `|z|>3`), i.e. the new Phase 2
 evaluator layer introduces no detectable drift versus Phase 1's raw-environment
 diagnostic.
 
+> **Erratum (added during Phase 3, see `event_driven_phase3_results.md`
+> Section 3):** the `oracle`/`belief_weighted`/`randomised` rows in the
+> table above are **wrong**. `run_event_analytic_agent_episode` divided the
+> event-driven environment's already-raw inventory by `SBW.INV_UNIT` a
+> second time (that constant exists only to un-normalise the *fixed-step*
+> environment's observation), inflating it 10,000× and saturating
+> `SBW.get_control`'s inventory-grid clipping to the boundary for almost any
+> nonzero inventory. This was not caught at the time because the numbers
+> were merely compared against Phase 1's *naive*-policy diagnostic (naive
+> does not depend on `inv_sc` at all, so it was correctly unaffected and
+> matched) — the comparison above never checked oracle/belief-weighted/
+> randomised against each other or against theory, which would have shown
+> naive implausibly beating them. Fixed in Phase 3; two regression tests
+> added (`tests/test_event_driven_agent_integration.py`). The `naive` row
+> above is unaffected and correct. Corrected oracle/belief_weighted/
+> randomised numbers (200 holdout episodes, seeds 200000-200199): oracle
+> 45.21±2.99, belief_weighted 45.04±2.97, randomised 45.14±2.97 — all
+> properly above naive (44.46), matching CJ theory and the fixed-step
+> ordering, as they should.
+
 ## 9. Exogenous path-pairing proof
 
 `compute_exogenous_path_hash(seed, action_fn)` hashes only

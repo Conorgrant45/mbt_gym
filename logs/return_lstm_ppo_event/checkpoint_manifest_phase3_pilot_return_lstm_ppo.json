@@ -1,0 +1,25 @@
+{
+  "agent_type": "return_lstm_ppo",
+  "environment_type": "event",
+  "run_tag": "phase3_pilot_return_lstm_ppo",
+  "learner_seed": 0,
+  "training_env_seed": 70000,
+  "total_timesteps": 16000,
+  "checkpoint_frequency": 8000,
+  "checkpoints": [
+    {
+      "timestep": 8000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_lstm_ppo_event\\checkpoints\\phase3_pilot_return_lstm_ppo\\ppo_return_lstm_ppo_phase3_pilot_return_lstm_ppo_t000008000.zip",
+      "saved_at": "2026-07-27T14:51:51",
+      "is_final": false,
+      "policy_hash": "27d85584e7161830f19b7eb2e6ebc1986225654ec268f4b4be62603d72cbc70b"
+    },
+    {
+      "timestep": 16000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_lstm_ppo_event\\checkpoints\\phase3_pilot_return_lstm_ppo\\ppo_return_lstm_ppo_phase3_pilot_return_lstm_ppo_t000016000.zip",
+      "saved_at": "2026-07-27T14:53:14",
+      "is_final": true,
+      "policy_hash": "4866de8f20fd9d498a70d7db10f162a01623c167f829232445f5d83efe197760"
+    }
+  ]
+}

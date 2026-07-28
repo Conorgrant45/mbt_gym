@@ -813,3 +813,64 @@ def test_max_inventory_fill_suppression_does_not_desync_rng():
         assert info_c["arrival_side"] == info_u["arrival_side"]
         if done_c or done_u:
             break
+
+
+# ======================================================================
+# Regression test (Phase 3 bug fix): evaluate_agents_event_driven.py's
+# run_event_analytic_agent_episode previously divided the event-driven
+# environment's already-raw inventory by SBW.INV_UNIT (1/10000) a SECOND
+# time -- INV_UNIT exists only to convert the FIXED-STEP environment's
+# NORMALISED observation component back to raw share units (see
+# evaluate_agents_common.py's/simulate_belief_weighted.py's own
+# "inventory = obs_flat[1]; inv_sc = inventory / INV_UNIT" pattern), and the
+# event-driven environment's raw_inventory was never normalised in the first
+# place. This inflated inv_sc by 10000x (e.g. 0.5 shares -> inv_sc=5000),
+# saturating SBW.get_control's grid clipping (range roughly [-50, 50]) to the
+# boundary for almost any nonzero inventory -- making the event-driven
+# oracle/belief-weighted/randomised analytic benchmarks quote a near-
+# permanent, wildly asymmetric extreme-inventory control instead of the
+# intended smooth CJ inventory skew. Confirmed and fixed during Phase 3
+# analysis (see event_driven_phase3_results.md for the full writeup and the
+# numeric evidence that motivated the fix -- naive scoring materially
+# HIGHER than oracle/belief-weighted/randomised in the event-driven holdout,
+# the reverse of the fixed-step pattern and of CJ theory).
+# ======================================================================
+def test_event_analytic_policy_inv_sc_matches_raw_inventory_not_inflated():
+    import inspect
+    import re
+    source = inspect.getsource(EAED.run_event_analytic_agent_episode)
+    # The bug was specifically `inv_sc = q / SBW.INV_UNIT` (or equivalent) --
+    # check for that statement pattern, not the mere mention of INV_UNIT
+    # (which now legitimately appears in an explanatory comment).
+    assert not re.search(r"inv_sc\s*=\s*q\s*/\s*SBW\.INV_UNIT", source), (
+        "run_event_analytic_agent_episode must not divide raw inventory by SBW.INV_UNIT -- "
+        "the event-driven environment's inventory was never normalised, unlike the fixed-step "
+        "observation INV_UNIT exists to invert."
+    )
+
+
+def test_event_analytic_policy_control_responds_smoothly_to_small_inventory():
+    """A small, realistic inventory change (0.5 -> 2.0 shares, well within
+    the actual event-driven inventory range observed empirically) must move
+    the control smoothly along the grid, not saturate to the boundary."""
+    controls = {}
+    for regime, params in SBW.REGIME_PARAMS.items():
+        da, db, qag, qbg = SBW.build_optimal_control(**params)
+        controls[regime] = dict(delta_ask=da, delta_bid=db, q_ask=qag, q_bid=qbg)
+    c0 = controls[0]
+
+    ask_0, bid_0 = EAED.continuous_time_control(c0["delta_ask"], c0["delta_bid"], c0["q_ask"], c0["q_bid"], 0.5, 0.0)
+    ask_1, bid_1 = EAED.continuous_time_control(c0["delta_ask"], c0["delta_bid"], c0["q_ask"], c0["q_bid"], 0.5, 1.0)
+    ask_2, bid_2 = EAED.continuous_time_control(c0["delta_ask"], c0["delta_bid"], c0["q_ask"], c0["q_bid"], 0.5, 2.0)
+
+    # Saturated (buggy) behaviour collapses ask_1==ask_2 and bid_1==bid_2
+    # exactly (both already at the grid boundary) -- the fixed behaviour
+    # must show a genuine, distinct, monotonic response to inventory.
+    assert ask_0 != pytest.approx(ask_1) or bid_0 != pytest.approx(bid_1)
+    assert not (ask_1 == pytest.approx(ask_2) and bid_1 == pytest.approx(bid_2)), (
+        "control saturated identically at inventory=1.0 and inventory=2.0 -- "
+        "looks like the inv_sc-inflation bug is back."
+    )
+    # Long inventory (positive q) should discourage further buying (bid should
+    # widen/worsen) relative to flat inventory -- standard CJ inventory skew.
+    assert bid_2 >= bid_0

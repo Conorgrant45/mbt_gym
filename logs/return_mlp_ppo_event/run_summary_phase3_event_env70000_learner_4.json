@@ -1,0 +1,102 @@
+{
+  "agent_type": "return_mlp_ppo",
+  "environment_type": "event",
+  "run_tag": "phase3_event_env70000_learner_4",
+  "finished_at": "2026-07-27T15:42:07",
+  "total_elapsed_seconds": 132.6335597038269,
+  "train_elapsed_seconds": 129.29793858528137,
+  "learner_seed": 4,
+  "training_env_seed": 70000,
+  "architecture": {
+    "actor_hidden_layers": [
+      64,
+      64
+    ],
+    "critic_hidden_layers": [
+      64,
+      64
+    ],
+    "actor_output_dim": 2,
+    "critic_output_dim": 1,
+    "activation_fn": "Tanh",
+    "total_parameters": 9157
+  },
+  "rollout_geometry": {
+    "environment_type": "event",
+    "n_steps": 4000,
+    "batch_size": 400,
+    "n_envs": 1,
+    "buffer_size": 4000,
+    "episode_length": "variable (no fixed step count -- see mean_transitions_per_episode)",
+    "mean_transitions_per_episode": 280,
+    "approx_episodes_per_rollout": 14.285714285714286,
+    "rollouts_span_full_episode": false,
+    "rollouts_span_multiple_episodes": true,
+    "n_minibatches_per_epoch": 10,
+    "n_gradient_updates_per_rollout": 100,
+    "n_rollouts_total": 50
+  },
+  "baseline_summary": {
+    "n_episodes": 5,
+    "mean_cumulative_reward": 24.094531300496072,
+    "std_cumulative_reward": 34.53408264316783,
+    "mean_raw_pnl": 24.27480095747117,
+    "mean_terminal_abs_inventory": 4.6,
+    "action_mean_bid": 0.0037580555080958503,
+    "action_mean_ask": -0.0008097560603911767,
+    "action_std_bid": 0.001613142435329224,
+    "action_std_ask": 0.0011551563816283993,
+    "mean_episode_length": 276.6,
+    "total_timesteps": 0,
+    "tag": "baseline_untrained"
+  },
+  "final_summary": {
+    "n_episodes": 5,
+    "mean_cumulative_reward": -10.185590646809677,
+    "std_cumulative_reward": 107.26948006551117,
+    "mean_raw_pnl": -7.909646741856614,
+    "mean_terminal_abs_inventory": 21.0,
+    "action_mean_bid": 0.8165511608403917,
+    "action_mean_ask": -0.18233641578303414,
+    "action_std_bid": 0.18374156730774158,
+    "action_std_ask": 0.06307982376498904,
+    "mean_episode_length": 276.6,
+    "total_timesteps": 200000,
+    "tag": "final_post_training"
+  },
+  "reload_summary": {
+    "n_episodes": 5,
+    "mean_cumulative_reward": -10.185590646809677,
+    "std_cumulative_reward": 107.26948006551117,
+    "mean_raw_pnl": -7.909646741856614,
+    "mean_terminal_abs_inventory": 21.0,
+    "action_mean_bid": 0.8165511608403917,
+    "action_mean_ask": -0.18233641578303414,
+    "action_std_bid": 0.18374156730774158,
+    "action_std_ask": 0.06307982376498904,
+    "mean_episode_length": 276.6
+  },
+  "improvement_over_baseline_mean_reward": -34.28012194730575,
+  "save_reload_equivalence_ok": true,
+  "max_action_diff_save_reload": 0.0,
+  "max_reward_diff_save_reload": 0.0,
+  "numerical_instability": [],
+  "final_training_metrics": {
+    "train/entropy_loss": -2.6179222416877748,
+    "train/policy_gradient_loss": -0.00042312486044902896,
+    "train/value_loss": 1646.4389782714843,
+    "train/approx_kl": "0.0023980893",
+    "train/loss": 802.4152221679688
+  },
+  "best_validation_mean_objective": 41.16698216715543,
+  "best_validation_std_objective": 48.18424262224386,
+  "best_validation_timestep": 32000,
+  "best_model_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\return_mlp_ppo_event\\ppo_return_mlp_ppo_phase3_event_env70000_learner_4_best.zip",
+  "validation_seeds": [
+    90001,
+    90002,
+    90003,
+    90004,
+    90005
+  ]
+}
