@@ -1,0 +1,116 @@
+{
+  "group": "B",
+  "learner_seed": 3,
+  "training_env_seed": 70000,
+  "log_std_init": -1.5,
+  "init_type": "random",
+  "checkpoints": [
+    {
+      "timestep": 16000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000016000.zip",
+      "policy_hash": "90d3f6371cf44c72b5ea4744ab07c95cc9dd9a1ad08584f466d5f05ec45c487f"
+    },
+    {
+      "timestep": 32000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000032000.zip",
+      "policy_hash": "53342b4fa1484e4eab2c666e1a8b27c1b83b04b7d4d015c3e0f7c19ce7c3bf8e"
+    },
+    {
+      "timestep": 48000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000048000.zip",
+      "policy_hash": "6879244076a8363b8ab0fcb7ff7289b3e0c0dbe40ec13e8c34e2c4706e4e94a9"
+    },
+    {
+      "timestep": 64000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000064000.zip",
+      "policy_hash": "5bdb0f507569c8dd4211c6e29c126f66c16f258e8a116c47054876b10b3ba824"
+    },
+    {
+      "timestep": 80000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000080000.zip",
+      "policy_hash": "cfb5ff953483fcc530496064554fb705809b1c151b02c60e9ddceb4723e7ea47"
+    },
+    {
+      "timestep": 96000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000096000.zip",
+      "policy_hash": "b43947fc010cdcda1069bd5a56f0c9a3f6b2e61c332d52ca2e6f1d1bec6df482"
+    },
+    {
+      "timestep": 112000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000112000.zip",
+      "policy_hash": "576af5b804e7ac83d7303b7cce032f535fd0a31c7271e21b6e895faec2ce9409"
+    },
+    {
+      "timestep": 128000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000128000.zip",
+      "policy_hash": "f806d59f6bf0cc417b3042b0a42b118f93449bd0a7ed654053522faf549281f5"
+    },
+    {
+      "timestep": 144000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000144000.zip",
+      "policy_hash": "6eb5a4a3e4efceb299d0a18c4c948e966327a29d225e482ba01764c3e1ce27db"
+    },
+    {
+      "timestep": 160000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000160000.zip",
+      "policy_hash": "52e66385d4d7d77604a4e9229ea1258d008696c21224292c4980176a2f56bd1f"
+    },
+    {
+      "timestep": 176000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000176000.zip",
+      "policy_hash": "0fab31f88c5772af1279b80897058f0b05d62e59a23719478b5e74e5d9983ca7"
+    },
+    {
+      "timestep": 192000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000192000.zip",
+      "policy_hash": "723aa5c05c905280653232f9c5cbf0b2a7c8ec9820f84612e3479db392770dd1"
+    },
+    {
+      "timestep": 200000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000200000.zip",
+      "policy_hash": "11c2f52b0699c6077e038d7a8e5e05d6fe965ad9ae621259e5333a435bb9d276"
+    },
+    {
+      "timestep": 300000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000300000.zip",
+      "policy_hash": "392f2eebd8e1365dc72995eebe493898b52815b76b819c1fc30afe3c1eb79f90"
+    },
+    {
+      "timestep": 400000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000400000.zip",
+      "policy_hash": "0bb23cba55569f427384d0554c2eeaa8e345b718842da3401b90c3a845cd5ffc"
+    },
+    {
+      "timestep": 500000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000500000.zip",
+      "policy_hash": "8356f5225139d93bcfefb33714bec1b560baafb9d798894e92d4c487216e9998"
+    },
+    {
+      "timestep": 600000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000600000.zip",
+      "policy_hash": "d3ae3fc14363fb44c912f95c3c801212009ebfce8c63b13a471dac6be9afb454"
+    },
+    {
+      "timestep": 700000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000700000.zip",
+      "policy_hash": "5da5b891e81fcaea86aa0235da14d7ae71f1c16a6310bee4bd5233f8dc565b88"
+    },
+    {
+      "timestep": 800000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000800000.zip",
+      "policy_hash": "bc5e8241ee251dc3f4016fa33813a1201787be2d7563c479fc35be083e882fbd"
+    },
+    {
+      "timestep": 900000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000900000.zip",
+      "policy_hash": "fb9a431fca32dafa89ce2f0d017e76684ab610729774b4ecee955feb25206188"
+    },
+    {
+      "timestep": 1000000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t001000000.zip",
+      "policy_hash": "bfaf76b176c8f9d79cd030b9509c5d90e3bee246468918e3261c3a4b60f092ad"
+    }
+  ],
+  "final_transitions_reached": 1000000,
+  "last_updated_at": "2026-07-29T13:29:28"
+}

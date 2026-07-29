@@ -1,0 +1,2 @@
+group,n_seeds,mean_det_objective_at_200k,sd_det_objective_at_200k,mean_best_before_200k,mean_best_after_200k,mean_final_at_1m,sd_final_at_1m,mean_slope_final_200k,mean_explained_variance_final_200k,mean_clip_fraction_final_200k,n_distinct_seed_classifications,seed_classifications,group_classification
+B,5,43.72945828637826,1.1579143494601094,44.320752985439796,48.092010872599374,46.375649426886795,2.164799551497314,1.0236892181076964e-05,0.4103741098852719,0.03245147056989002,1,['A_BUDGET_LIMITED'],A_BUDGET_LIMITED

@@ -1,0 +1,84 @@
+{
+  "created_at": "2026-07-29T11:19:41",
+  "git_commit": "1d54f7b5957095e00e0dc01da2c6c946f531d6c9",
+  "dependency_versions": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "gym": "0.26.2",
+    "gymnasium": "1.2.3",
+    "stable_baselines3": "2.8.0",
+    "sb3_contrib": "2.8.0",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.2.4",
+    "pandas": "3.0.0"
+  },
+  "group": "B",
+  "group_config": {
+    "init": "random",
+    "log_std_init": -1.5
+  },
+  "learner_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "training_env_seed": 70000,
+  "total_transitions": 1000000,
+  "phase6_total_transitions": 200000,
+  "checkpoint_timesteps": [
+    16000,
+    32000,
+    48000,
+    64000,
+    80000,
+    96000,
+    112000,
+    128000,
+    144000,
+    160000,
+    176000,
+    192000,
+    200000,
+    300000,
+    400000,
+    500000,
+    600000,
+    700000,
+    800000,
+    900000,
+    1000000
+  ],
+  "ppo_kwargs": {
+    "learning_rate": 0.0003,
+    "n_steps": 4000,
+    "batch_size": 400,
+    "n_epochs": 10,
+    "gamma": 1.0,
+    "gae_lambda": 0.95,
+    "clip_range": 0.2,
+    "ent_coef": 0.0,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "device": "cpu"
+  },
+  "net_arch": [
+    64,
+    64
+  ],
+  "validation_seed_start": 260000,
+  "validation_seed_count": 50,
+  "phase6_validation_seed_range": [
+    240000,
+    240049
+  ],
+  "phase6_holdout_seed_range": [
+    250000,
+    250199
+  ],
+  "note_phase6_holdout_untouched": "Phase 7 never reads or evaluates on Phase 6's holdout seeds 250000-250199.",
+  "tensorboard_available": false,
+  "tensorboard_note": "tensorboard package is not installed in this environment; per instruction #10 (do not install/upgrade packages unless absolutely necessary), TensorBoard logging is skipped and all diagnostics are written to CSV instead (phase7_training_diagnostics.csv, phase7_checkpoint_summary.csv), matching the brief's own fallback instruction.",
+  "resumability_convention": "seed-run granularity restart-from-scratch on interruption; see phase7_common.run_is_complete docstring."
+}
