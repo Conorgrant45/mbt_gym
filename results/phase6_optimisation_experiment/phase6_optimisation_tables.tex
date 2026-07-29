@@ -1,0 +1,107 @@
+% Phase 6: 2x2 optimisation experiment (actor initialisation x exploration variance)
+% Auto-authored to accompany phase6_optimisation_report.md
+% Training-env seed 70000, learner seeds 0-4, 200,000 transitions/run,
+% validation seeds 240000-240049 (50), holdout seeds 250000-250199 (200).
+% Event-driven Hamilton PPO only. Checkpoint selection: argmax deterministic
+% mean validation objective, tie-break earliest timestep.
+
+\subsection*{Group definitions}
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\hline
+Group & Actor initialisation & log\_std\_init (action std) \\
+\hline
+A & Random & 0.0 (std=1.0) \\
+B & Random & $-1.5$ (std=0.22) \\
+C & Supervised clone & 0.0 (std=1.0) \\
+D & Supervised clone & $-1.5$ (std=0.22) \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{Per-seed holdout results (200 fresh holdout episodes, seeds 250000--250199)}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{llrrrrrr}
+\hline
+Group & Seed & Mean $J$ & SE & Selected $t$ & Val.\ obj. & Val.$-$hold.\ gap & Final log\_std \\
+\hline
+A & 0 & 29.70 & 2.44 & 48{,}000  & 32.62 & 2.91  & $-0.064$ \\
+A & 1 & 35.92 & 3.15 & 16{,}000  & 32.95 & $-2.97$ & $-0.013$ \\
+A & 2 & 32.80 & 8.82 & 128{,}000 & 35.23 & 2.43  & $-0.082$ \\
+A & 3 & 30.56 & 3.05 & 48{,}000  & 33.09 & 2.52  & $-0.064$ \\
+A & 4 & 32.65 & 9.44 & 144{,}000 & 34.40 & 1.75  & $-0.077$ \\
+\hline
+B & 0 & 35.34 & 2.95 & 16{,}000  & 34.18 & $-1.16$ & $-1.520$ \\
+B & 1 & 36.73 & 2.57 & 80{,}000  & 34.44 & $-2.30$ & $-1.552$ \\
+B & 2 & 35.63 & 3.64 & 192{,}000 & 38.03 & 2.40  & $-1.606$ \\
+B & 3 & 36.45 & 4.01 & 176{,}000 & 34.37 & $-2.08$ & $-1.611$ \\
+B & 4 & 36.56 & 2.61 & 48{,}000  & 35.20 & $-1.36$ & $-1.537$ \\
+\hline
+C & 0 & 40.73 & 4.11 & 16{,}000 & 40.33 & $-0.40$ & $-0.004$ \\
+C & 1 & 40.77 & 2.61 & 16{,}000 & 44.29 & 3.51  & 0.010 \\
+C & 2 & 41.95 & 2.51 & 16{,}000 & 48.83 & 6.88  & 0.002 \\
+C & 3 & 39.96 & 3.17 & 16{,}000 & 38.83 & $-1.13$ & $-0.021$ \\
+C & 4 & 38.91 & 2.64 & 32{,}000 & 40.87 & 1.96  & $-0.020$ \\
+\hline
+D & 0 & 42.14 & 2.98 & 96{,}000  & 48.91 & 6.77 & $-1.586$ \\
+D & 1 & 42.33 & 3.02 & 144{,}000 & 47.46 & 5.13 & $-1.557$ \\
+D & 2 & 39.90 & 4.43 & 96{,}000  & 47.99 & 8.09 & $-1.566$ \\
+D & 3 & 41.52 & 3.25 & 144{,}000 & 46.15 & 4.63 & $-1.575$ \\
+D & 4 & 41.86 & 3.76 & 48{,}000  & 48.43 & 6.57 & $-1.562$ \\
+\hline
+\end{tabular}
+\caption{Action saturation rate is 0.0 for every one of the 20 selected models (deterministic
+holdout evaluation). Group C's checkpoint selection concentrates almost entirely at t=16{,}000
+(4/5 seeds) -- early-training checkpoints were selected before mid-training instability observed
+in that group's own validation curve (see plots/checkpoint\_training\_curves.png).}
+\end{table}
+
+\subsection*{Group summary (across 5 learner seeds)}
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrrrrrr}
+\hline
+Group & Mean $J$ & SD & Min & Max & Loss rate & Fills & Mean $|Q|$ \\
+\hline
+A & 32.33 & 2.41 & 29.70 & 35.92 & 0.199 & 31.2 & 6.21 \\
+B & 36.14 & 0.62 & 35.34 & 36.73 & 0.128 & 31.0 & 3.45 \\
+C & 40.47 & 1.12 & 38.91 & 41.95 & 0.101 & 50.9 & 3.42 \\
+D & 41.55 & 0.97 & 39.90 & 42.33 & 0.134 & 63.5 & 4.01 \\
+\hline
+Oracle (analytical)  & 41.80 & (se 2.81) & -- & -- & 0.100 & 65.2 & 3.29 \\
+Belief-weighted      & 41.90 & (se 2.80) & -- & -- & 0.100 & 65.1 & 3.28 \\
+Frozen supervised clone & 41.70 & (se 2.82) & -- & -- & 0.100 & 65.1 & 3.29 \\
+\hline
+\end{tabular}
+\caption{Both clone-initialised groups (C, D) reach holdout performance statistically
+indistinguishable from the analytical oracle/belief-weighted policies and the frozen supervised
+clone (all $\approx$41.7--41.9, within 1-2 points and well inside standard error). Random
+initialisation (A, B) remains clearly below this level even at 200{,}000 transitions. Cross-seed
+SD drops substantially from A (2.41) to every other group (0.62--1.12) -- both interventions
+improve robustness, not just the mean.}
+\end{table}
+
+\subsection*{Factor effects (seed-level paired differences on holdout mean objective, n=5)}
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrrrr}
+\hline
+Contrast & Mean & SD & Min & Max & 95\% bootstrap CI (weak, n=5) \\
+\hline
+Reduced exploration, random init (B$-$A) & 3.82 & 2.10 & 0.81 & 5.89 & [2.18, 5.39] \\
+Reduced exploration, clone init (D$-$C)  & 1.09 & 1.86 & $-2.05$ & 2.95 & [$-0.64$, 2.36] \\
+Clone init, default exploration (C$-$A)  & 8.14 & 2.51 & 4.85 & 11.03 & [6.04, 10.00] \\
+Clone init, reduced exploration (D$-$B)  & 5.41 & 0.92 & 4.27 & 6.80 & [4.74, 6.15] \\
+Interaction (D$-$C)$-$(B$-$A)            & $-2.73$ & 2.48 & $-4.88$ & 0.75 & [$-4.53$, $-0.61$] \\
+\hline
+\end{tabular}
+\caption{Clone initialisation's effect is large and clearly non-zero at BOTH exploration
+settings (C$-$A and D$-$B both exclude 0 comfortably). Reduced exploration's effect is clearly
+non-zero for random initialisation (B$-$A) but NOT clearly distinguishable from zero for clone
+initialisation (D$-$C, CI includes 0) -- diminishing returns once the actor already starts from a
+good policy. The interaction is negative and excludes zero: the two interventions are
+sub-additive, not synergistic, on this measure.}
+\end{table}

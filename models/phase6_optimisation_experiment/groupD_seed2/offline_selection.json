@@ -1,0 +1,16 @@
+{
+  "group": "D",
+  "learner_seed": 2,
+  "selection_metric": "det_mean_objective",
+  "tie_break_rule": "earlier_timestep",
+  "validation_seed_start": 240000,
+  "validation_seed_count": 50,
+  "selected_timestep": 96000,
+  "selected_det_mean_objective": 47.98940690730507,
+  "selected_stoch_mean_objective": 41.45576789353713,
+  "offline_best_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed2\\ppo_hamilton_ppo_groupD_seed2_offline_best.zip",
+  "source_hash": "da6f927901ac6c5c494114c719477d9df17e4d2cd33e5a9ee584de07b253902f",
+  "copied_hash": "da6f927901ac6c5c494114c719477d9df17e4d2cd33e5a9ee584de07b253902f",
+  "hash_verified": true,
+  "created_at": "2026-07-28T18:54:25"
+}

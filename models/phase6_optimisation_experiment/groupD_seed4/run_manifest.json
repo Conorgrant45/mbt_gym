@@ -1,0 +1,81 @@
+{
+  "group": "D",
+  "learner_seed": 4,
+  "training_env_seed": 70000,
+  "log_std_init": -1.5,
+  "init_type": "clone",
+  "checkpoints": [
+    {
+      "timestep": 16000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000016000.zip",
+      "policy_hash": "35ee3bc7fe2bcef1cb74aac5b615dd25368fb413ce60e9a2a55fc5f196c6dbab"
+    },
+    {
+      "timestep": 32000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000032000.zip",
+      "policy_hash": "0b5d65700b51cb3a857ce70279c55304b45465da6a496159abcc4b2e630a6b41"
+    },
+    {
+      "timestep": 48000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000048000.zip",
+      "policy_hash": "747d0b17b29934b5a80cf5eb122e39aceb20287d642be354924f2fd0eec0779e"
+    },
+    {
+      "timestep": 64000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000064000.zip",
+      "policy_hash": "94378c570c45eecdd818b5bd86afcb7722e5394e0a746c44d2a8f6e04a21b664"
+    },
+    {
+      "timestep": 80000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000080000.zip",
+      "policy_hash": "98204ebf43d1db8d2e0b79141934e1f6c9d8cc30222f76a5bcea91d79a1da8e1"
+    },
+    {
+      "timestep": 96000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000096000.zip",
+      "policy_hash": "54487be7a5ccc2cc65f05ca1aa125ae1246ca3bb279db95387f8ab50819e389d"
+    },
+    {
+      "timestep": 112000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000112000.zip",
+      "policy_hash": "e75a2c36b1aad1f3f8eaebfd1ea694f17e5ff711ab717bc8bd300d0e1f357344"
+    },
+    {
+      "timestep": 128000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000128000.zip",
+      "policy_hash": "c42d58818fbd61a9c6a12e34957833cf3f1e8c49214ecd54446d9e8e3b1d3a69"
+    },
+    {
+      "timestep": 144000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000144000.zip",
+      "policy_hash": "4b07734e861f8752d872421fb36c2ceb835789aa3373b5ad8e73c4d178b8f4fd"
+    },
+    {
+      "timestep": 160000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000160000.zip",
+      "policy_hash": "75570269df70386b254dae2335065a6cb93327c942afc5691ab90728759e3ee3"
+    },
+    {
+      "timestep": 176000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000176000.zip",
+      "policy_hash": "a5ca6d8166c64fd4e4ab3a3dc5d9f0179ac990e49ec191d99fdb79eabd64b57f"
+    },
+    {
+      "timestep": 192000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000192000.zip",
+      "policy_hash": "33100dc87942b1453e4d7f1c040a7940058d808e5f914380a038512bd68b806d"
+    },
+    {
+      "timestep": 200000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase6_optimisation_experiment\\groupD_seed4\\ppo_hamilton_ppo_groupD_seed4_t000200000.zip",
+      "policy_hash": "c7cbc7eb88d19b58cd5a3e6f013d35f4bf1ac82939d0fb49645c2bfe2a9bb327"
+    }
+  ],
+  "clone_verification": {
+    "max_abs_diff": 4.172325134277344e-07,
+    "mean_abs_diff": 5.161598082281671e-08,
+    "n_states": 9471,
+    "tolerance": 0.0001,
+    "passed": true
+  }
+}
