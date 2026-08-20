@@ -51,8 +51,9 @@ from datetime import datetime
 
 from envs.make_envs import STEP_SIZE, INITIAL_PRICE, TRANSITION_MATRIX
 from beliefs.hamilton_filter import HamiltonFilter
+from pathlib import Path as _Path
 
-IMAGES_DIR = r'C:\Users\conor\OneDrive\Documents\Edinburgh master\Dissertation\Python\Regime-Aware-Reinforcement-Learning\images'
+IMAGES_DIR = str(_Path(__file__).resolve().parent.parent / "results" / "thesis_final_plots" / "figures")
 N_STEPS = 1000
 SEED = 12  # chosen by scanning seeds for a clean, representative episode
 

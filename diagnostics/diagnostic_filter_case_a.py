@@ -45,8 +45,9 @@ from datetime import datetime
 from scipy.stats import norm
 
 from envs.make_envs import TRANSITION_MATRIX, STEP_SIZE
+from pathlib import Path as _Path
 
-IMAGES_DIR = r'C:\Users\conor\OneDrive\Documents\Edinburgh master\Dissertation\Python\Regime-Aware-Reinforcement-Learning\images'
+IMAGES_DIR = str(_Path(__file__).resolve().parent.parent / "results" / "thesis_final_plots" / "figures")
 
 # ------------------------------------------------------------------
 # Parameters
