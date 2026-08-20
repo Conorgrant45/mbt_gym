@@ -1,4 +1,0 @@
-agent_type,n_seed_pairs,per_seed_diffs,mean_diff_event_minus_fixed,std_diff,bootstrap_ci_lo,bootstrap_ci_hi,n_bootstrap,frac_seeds_event_beats_fixed
-hamilton_ppo,5,"[np.float64(-0.2406), np.float64(1.2962), np.float64(-0.4391), np.float64(9.6908), np.float64(4.6781)]",2.9970798467644344,4.266558244955445,-0.012629054522103899,6.6831654637173274,10000,0.6
-return_mlp_ppo,5,"[np.float64(14.0593), np.float64(-5.6641), np.float64(-10.01), np.float64(3.6689), np.float64(-4.655)]",-0.5201776303126777,9.535770810934801,-7.200630873640745,7.82504862141657,10000,0.4
-return_lstm_ppo,5,"[np.float64(42.0778), np.float64(-9.2399), np.float64(1.23), np.float64(5.6753), np.float64(-7.1415)]",6.520354111280961,20.78498768540973,-6.306535624454992,24.953440286212977,10000,0.6

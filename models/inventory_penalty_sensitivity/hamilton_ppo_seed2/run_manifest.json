@@ -1,0 +1,22 @@
+{
+  "architecture": "hamilton_ppo",
+  "learner_seed": 2,
+  "status": "trained_this_experiment",
+  "penalty_calibration": "high_penalty",
+  "phi": 0.1,
+  "alpha": 0.01,
+  "training_env_seed": 70000,
+  "log_std_init": -1.5,
+  "initial_model_saved": true,
+  "initial_model_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\inventory_penalty_sensitivity\\hamilton_ppo_seed2\\ppo_hamilton_ppo_seed2_t000000000_initial.zip",
+  "checkpoints": [
+    {
+      "timestep": 1000000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\inventory_penalty_sensitivity\\hamilton_ppo_seed2\\ppo_hamilton_ppo_seed2_t001000000.zip",
+      "policy_hash": "50f84e3ae0bbf6c4891a48cef28054c1ddd212782172030254050ce176f2526b",
+      "source": "trained_this_experiment"
+    }
+  ],
+  "final_transitions_reached": 1000000,
+  "last_updated_at": "2026-08-17T19:05:19"
+}

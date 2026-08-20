@@ -1,0 +1,22 @@
+{
+  "figure": "fig02_holdout_ecdf",
+  "source_file": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\results\\final_reduced_exploration_architecture_comparison\\final_holdout_episode_level.csv",
+  "checkpoint": 1000000,
+  "architectures": {
+    "hamilton_ppo": {
+      "median_at_zero": 0.19000232154586794
+    },
+    "return_mlp_ppo": {
+      "median_at_zero": 0.2800023215458679
+    },
+    "return_lstm_ppo": {
+      "median_at_zero": 0.22950058038646698
+    }
+  },
+  "benchmarks": {},
+  "envelope_contains_median_check": {
+    "hamilton_ppo": true,
+    "return_mlp_ppo": true,
+    "return_lstm_ppo": true
+  }
+}

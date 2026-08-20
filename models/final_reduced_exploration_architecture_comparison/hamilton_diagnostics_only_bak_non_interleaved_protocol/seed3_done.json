@@ -1,0 +1,9 @@
+{
+  "learner_seed": 3,
+  "final_transitions": 1000000,
+  "n_updates_recorded": 250,
+  "total_elapsed_seconds": 1605.949654340744,
+  "det_mean_objective": 32.68464642608029,
+  "phase7_reference": 45.999673,
+  "last_updated_at": "2026-08-06T10:33:37"
+}

@@ -1,0 +1,14 @@
+\begin{table}
+\caption{Performance on 500 previously unseen paired market paths.}
+\label{tab:phase7-unseen-policy-summary}
+\begin{tabular}{lcccccc}
+\toprule
+Policy & Number of seeds & Mean objective & Cross-seed SD & Mean fills & Mean quoted spread & Mean absolute inventory \\
+\midrule
+Hamilton Ppo (5-Seed Aggregate) & 5.00 & 35.35 & 1.31 & 37.19 & 2.70 & 4.07 \\
+Oracle & NaN & 43.73 & NaN & 63.70 & 2.06 & 3.20 \\
+Belief-weighted policy & NaN & 43.67 & NaN & 63.66 & 2.06 & 3.21 \\
+Frozen supervised clone & NaN & 43.70 & NaN & 63.62 & 2.06 & 3.19 \\
+\bottomrule
+\end{tabular}
+\end{table}

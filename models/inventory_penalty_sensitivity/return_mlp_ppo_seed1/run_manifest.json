@@ -1,0 +1,22 @@
+{
+  "architecture": "return_mlp_ppo",
+  "learner_seed": 1,
+  "status": "trained_this_experiment",
+  "penalty_calibration": "high_penalty",
+  "phi": 0.1,
+  "alpha": 0.01,
+  "training_env_seed": 70000,
+  "log_std_init": -1.5,
+  "initial_model_saved": true,
+  "initial_model_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\inventory_penalty_sensitivity\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000000000_initial.zip",
+  "checkpoints": [
+    {
+      "timestep": 1000000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\inventory_penalty_sensitivity\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t001000000.zip",
+      "policy_hash": "b9dd89d6be2403a389fbcbd5d63ecc4862d2961d75d3c89f3091e95e361843c7",
+      "source": "trained_this_experiment"
+    }
+  ],
+  "final_transitions_reached": 1000000,
+  "last_updated_at": "2026-08-17T20:03:22"
+}

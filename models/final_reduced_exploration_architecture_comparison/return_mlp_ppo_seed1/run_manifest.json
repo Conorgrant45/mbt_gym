@@ -1,0 +1,139 @@
+{
+  "architecture": "return_mlp_ppo",
+  "learner_seed": 1,
+  "status": "trained_this_experiment",
+  "training_env_seed": 70000,
+  "log_std_init": -1.5,
+  "initial_model_saved": true,
+  "initial_model_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000000000_initial.zip",
+  "checkpoints": [
+    {
+      "timestep": 16000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000016000.zip",
+      "policy_hash": "e2688e5d5cc89785b02477a27061d025fdb82d5e54a5f3371ec1948f5b8c81c2",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 32000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000032000.zip",
+      "policy_hash": "2c89b1234099eeb78fce290d009c48b7c3e11f0833510a08325aa91e63dca771",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 48000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000048000.zip",
+      "policy_hash": "d62afbc0000e66eaa444a8314594d92f42b978f4749d3b8af0a7808e59c1e425",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 64000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000064000.zip",
+      "policy_hash": "4e4a3af64279dcc3f984a7eb468af3f73a9895428720e8cd3df873aab874ef4a",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 80000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000080000.zip",
+      "policy_hash": "bc4ea09b67810e4f1c3d136a2591f7023b7b3f4406bd9749236c1bae2993b855",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 96000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000096000.zip",
+      "policy_hash": "47b12982c812bd65dd858c39f06d29bcad39cdddc04b3662fce20a46f604e712",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 112000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000112000.zip",
+      "policy_hash": "16573b0ffeee22c41c1799eed02345abdee8af22abd088bd7fffcd417e2e7bbb",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 128000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000128000.zip",
+      "policy_hash": "013e9510eeb28ed74472a5e0f7faacef83807ae487ac8bfa8a60da6ec145dd51",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 144000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000144000.zip",
+      "policy_hash": "b03c85c9ca75f1bc330b167a36944286ae6d52f2222a13ecb45930eb6c0d1321",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 160000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000160000.zip",
+      "policy_hash": "be21c5b56632502c07c2c68138692d331facf8c780305dc46aa0eadb4b38159f",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 176000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000176000.zip",
+      "policy_hash": "c5d1d81f76ce046528e9c6f74a8fa93d3e2adf1228eb915b2e7b7155c7d9dc37",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 192000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000192000.zip",
+      "policy_hash": "ecda37aaea459dd604546032887b1355496e8e6ec51375eca693bc8364bd8b42",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 200000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000200000.zip",
+      "policy_hash": "9c8f4e736f1be7fae57658b2e02ab3d997f7383b814807434c9794f062882386",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 300000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000300000.zip",
+      "policy_hash": "98adec3e62d240c3888136421848a993599a8e71a3fc24436a72b862ded61860",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 400000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000400000.zip",
+      "policy_hash": "417c2ae9181ed0cbff0fe3b87c6800b2304fdda7d250f058e19fa833a641b89b",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 500000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000500000.zip",
+      "policy_hash": "d800c977276d3b1ac2fa3d07f3f45fecc5f66fb7e57903085c037e50f5052ccd",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 600000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000600000.zip",
+      "policy_hash": "5e0a5315297e156e2d2dd5d84a5657b3d58830dcc74438dca0de5e594850b725",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 700000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000700000.zip",
+      "policy_hash": "5d70f0f91a2524cd095b1009d9cf81c8c983d3eac44d796cf8ad4cefa531f2a7",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 800000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000800000.zip",
+      "policy_hash": "0f336a7514c5b7c764dcfd8831df99f58d6a91aaf6635cef5e9258566ef3ba96",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 900000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t000900000.zip",
+      "policy_hash": "966eb02743d09ad992a688a157f5632de4e7ff28ef27d313ec3ef0d90e91ff09",
+      "source": "trained_this_experiment"
+    },
+    {
+      "timestep": 1000000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\final_reduced_exploration_architecture_comparison\\return_mlp_ppo_seed1\\ppo_return_mlp_ppo_seed1_t001000000.zip",
+      "policy_hash": "f6fe394f0461c8b9066dcb1ca0e4cfafcb4ee523d439ef8e0da0b1b253e14ed0",
+      "source": "trained_this_experiment"
+    }
+  ],
+  "final_transitions_reached": 1000000,
+  "last_updated_at": "2026-08-03T17:49:47"
+}

@@ -1,0 +1,46 @@
+{
+  "holdout_seed_start": 290000,
+  "holdout_seed_count": 500,
+  "disjoint_check": {
+    "label": "final_holdout",
+    "disjoint": true,
+    "n_seeds": 500,
+    "overlaps": {}
+  },
+  "checkpoint_transitions_evaluated": [
+    200000,
+    1000000
+  ],
+  "trajectory_subset_path_seeds": [
+    290000,
+    290001,
+    290002,
+    290003,
+    290004
+  ],
+  "trajectory_subset_policies": [
+    [
+      "hamilton_ppo",
+      0,
+      1000000
+    ],
+    [
+      "return_mlp_ppo",
+      0,
+      1000000
+    ],
+    [
+      "return_lstm_ppo",
+      0,
+      1000000
+    ],
+    [
+      "belief_weighted",
+      null,
+      null
+    ]
+  ],
+  "n_episode_rows": 16500,
+  "max_reward_reconciliation_error": 6.821210263296962e-13,
+  "elapsed_seconds": 6647.394266605377
+}

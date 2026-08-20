@@ -1,0 +1,55 @@
+{
+  "figure": "fig_epsilon_sweep_detection_delay",
+  "epsilon_values": [
+    0.5,
+    0.12559432157547903,
+    0.03154786722400966,
+    0.007924465962305569,
+    0.0019905358527674863,
+    0.0005
+  ],
+  "summary": {
+    "0.500000": {
+      "epsilon": 0.5,
+      "brier_score": 0.0015476140054204045,
+      "n_events": 112430,
+      "n_switches": 2214,
+      "n_detected": 2214
+    },
+    "0.125594": {
+      "epsilon": 0.12559432157547903,
+      "brier_score": 0.003946985145366845,
+      "n_events": 112143,
+      "n_switches": 2171,
+      "n_detected": 2169
+    },
+    "0.031548": {
+      "epsilon": 0.03154786722400966,
+      "brier_score": 0.008343094158305467,
+      "n_events": 112258,
+      "n_switches": 2226,
+      "n_detected": 2218
+    },
+    "0.007924": {
+      "epsilon": 0.007924465962305569,
+      "brier_score": 0.01693722977547104,
+      "n_events": 111906,
+      "n_switches": 2302,
+      "n_detected": 2284
+    },
+    "0.001991": {
+      "epsilon": 0.0019905358527674863,
+      "brier_score": 0.037608882386427935,
+      "n_events": 112608,
+      "n_switches": 2174,
+      "n_detected": 2144
+    },
+    "0.000500": {
+      "epsilon": 0.0005,
+      "brier_score": 0.10161668626101118,
+      "n_events": 111168,
+      "n_switches": 2259,
+      "n_detected": 2170
+    }
+  }
+}

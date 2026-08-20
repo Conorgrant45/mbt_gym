@@ -1,0 +1,9 @@
+{
+  "figure": "figA2_ppo_diagnostics",
+  "architectures_shown": [
+    "hamilton_ppo",
+    "return_mlp_ppo",
+    "return_lstm_ppo"
+  ],
+  "footnote": "hamilton_ppo included as a protocol-replication diagnostics run (not the official Phase 7 training)."
+}

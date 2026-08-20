@@ -1,0 +1,172 @@
+{
+  "architecture": "hamilton_ppo",
+  "learner_seed": 1,
+  "status": "reused_from_phase7",
+  "source_experiment": "phase7_groupB_1m_convergence",
+  "source_config_manifest": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\results\\phase7_groupB_1m_convergence\\phase7_config_manifest.json",
+  "reuse_compatibility_check": {
+    "compatible": true,
+    "field_checks": {
+      "environment_type_event": true,
+      "training_env_seed": true,
+      "total_transitions": true,
+      "learner_seeds": true,
+      "log_std_init": true,
+      "init_type_random": true,
+      "checkpoint_timesteps": true,
+      "net_arch": true,
+      "ppo_kwargs.learning_rate": true,
+      "ppo_kwargs.n_steps": true,
+      "ppo_kwargs.batch_size": true,
+      "ppo_kwargs.n_epochs": true,
+      "ppo_kwargs.gamma": true,
+      "ppo_kwargs.gae_lambda": true,
+      "ppo_kwargs.clip_range": true,
+      "ppo_kwargs.ent_coef": true,
+      "ppo_kwargs.vf_coef": true,
+      "ppo_kwargs.max_grad_norm": true,
+      "all_checkpoint_files_present_and_hash_verified": true
+    },
+    "checkpoint_details": {
+      "0": "all checkpoint hashes verified",
+      "1": "all checkpoint hashes verified",
+      "2": "all checkpoint hashes verified",
+      "3": "all checkpoint hashes verified",
+      "4": "all checkpoint hashes verified"
+    },
+    "phase7_manifest_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\results\\phase7_groupB_1m_convergence\\phase7_config_manifest.json",
+    "reason": null
+  },
+  "checkpoints": [
+    {
+      "timestep": 16000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000016000.zip",
+      "policy_hash": "e990742f4234f778eaa8659371e62f5964160201499cb1674f4b1e0fbd9efc8a",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 32000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000032000.zip",
+      "policy_hash": "c013d97c699049a79f9f095bac9a27cdba1935aff60c8abc6b9298d090b91512",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 48000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000048000.zip",
+      "policy_hash": "ea629fcfbc5c066e3f26b2282480ead6bbcc7f31133ba88a4b51a37af26a2165",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 64000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000064000.zip",
+      "policy_hash": "3cbf2f652d4d0f980b5597c8afe7141d4fcd03a8f936ef057cab00cdbdc4f5cf",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 80000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000080000.zip",
+      "policy_hash": "7a9b22a0bffb795014d95765ce7089a985651f9e6f2f449a88b107faf450ef8d",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 96000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000096000.zip",
+      "policy_hash": "7c9602d2892eb027e3000c33717cdb5441a1bb06de362578551b0087d310c2f2",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 112000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000112000.zip",
+      "policy_hash": "3ffa112d854ce380368ffd490cbcdab1010df06e5b940fa6613ffd9d544dec20",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 128000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000128000.zip",
+      "policy_hash": "208109cfcdbcc29d81da449b016d2b010995b8f2f058f6ff6a0ff83c2ab8af2c",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 144000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000144000.zip",
+      "policy_hash": "a54a81242a2f8c6982c02407fd50e82c7a267b98157945019687d4f368d76519",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 160000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000160000.zip",
+      "policy_hash": "d952151056938dbf87759faa66330655a4ea2ba519c6f6ca52b2f907f7160757",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 176000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000176000.zip",
+      "policy_hash": "4304d8e03ae25b709a82e11d23c0b78d182fe8c2746081b5d6c6bbee13083d13",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 192000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000192000.zip",
+      "policy_hash": "db1a7d50f074ccf0c888ea0010a7a3f41e599f7177dac095db196db4ff5a5c15",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 200000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000200000.zip",
+      "policy_hash": "cb8e60c53bc0d9f8ed816544fa126fa99cfa0e60c3d1dcab55ffc3c6b5738ba2",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 300000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000300000.zip",
+      "policy_hash": "31475a2bda6160619d0eeeeb52cab8b6fb177344bf6df07d9ec4a11059988184",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 400000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000400000.zip",
+      "policy_hash": "3a064e8313127342b3f85d0253f47052f50773eaee39e2c819e4fd0a5e06d00a",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 500000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000500000.zip",
+      "policy_hash": "6774304fa9174d2014d4b61b2ec5ce813a8c1018cb0fd5ee1d90fc9ea816f534",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 600000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000600000.zip",
+      "policy_hash": "a3a972fa9bc30607b3eb9f38156d73ce0e8c130d37ac0c1af2fc6fb61e9eae41",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 700000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000700000.zip",
+      "policy_hash": "e6ca933af3bc1068bbe32bb8fbea7b4489e637b476dab285710ad403acd70dee",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 800000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000800000.zip",
+      "policy_hash": "1b4a1fdbbff57d7f10ef6c71f318af2f3a5c33bcf3ddaa21be3e47907c0a03b6",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 900000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000900000.zip",
+      "policy_hash": "d9b13639cf3ba5145e4d109dc3cd6b7d2bb91614db4d7acea4c4bc60a73e26cb",
+      "source": "phase7_reused"
+    },
+    {
+      "timestep": 1000000,
+      "path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t001000000.zip",
+      "policy_hash": "72ff9dcdd89b02b61ad2abef8e83d2a835ae076108f61d9516560549d898e5bc",
+      "source": "phase7_reused"
+    }
+  ],
+  "final_transitions_reached": 1000000,
+  "initial_model_saved": false,
+  "initial_model_note": "Not applicable for reused runs -- Phase 7 already recorded its own initial-model provenance via clone-verification/log_std assertions at construction time; no separate t=0 checkpoint file exists in either Phase 7 or this experiment for Hamilton.",
+  "last_updated_at": "2026-08-03T16:50:18"
+}

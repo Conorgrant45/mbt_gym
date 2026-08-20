@@ -1,0 +1,8 @@
+{
+  "figure": "figA1_filter_calibration",
+  "brier_score": 0.001572045199605104,
+  "n_events": 1400687,
+  "n_switches_detected": 28049,
+  "median_detection_delay_events": 0.0,
+  "mean_detection_delay_events": 0.04542051410032443
+}

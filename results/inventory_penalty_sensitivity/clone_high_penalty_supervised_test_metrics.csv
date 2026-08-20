@@ -1,0 +1,2 @@
+calibration,phi,alpha,selected_init_seed,selected_epoch,train_mse,val_mse,test_mse,bid_test_mse,ask_test_mse,max_test_error,frac_test_outputs_near_bound,n_train,n_val,n_test
+high_penalty,0.1,0.01,0,77,1.1242203072470147e-05,1.2569509635795839e-05,1.3720266906602774e-05,1.3995877452543937e-05,1.3444657270156313e-05,0.04920560121536255,0.0,27916,8405,11316

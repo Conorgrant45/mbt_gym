@@ -1,0 +1,11 @@
+{
+  "holdout_seed_start": 290000,
+  "holdout_seed_count": 500,
+  "calibrations_requested_this_run": [
+    "high_penalty"
+  ],
+  "n_episode_rows_total": 18000,
+  "max_reward_reconciliation_error": 6.821210263296962e-13,
+  "elapsed_seconds": 164.1358983516693,
+  "timestamp": "2026-08-18T11:48:06"
+}

@@ -1,0 +1,10 @@
+{
+  "learner_seed": 0,
+  "final_transitions": 1000000,
+  "n_updates_recorded": 250,
+  "total_elapsed_seconds": 2247.9504778385162,
+  "det_mean_objective": 28.033166876347085,
+  "phase7_reference": 47.61095,
+  "protocol": "interleaved_checkpoint_eval_matching_official",
+  "last_updated_at": "2026-08-06T11:51:18"
+}

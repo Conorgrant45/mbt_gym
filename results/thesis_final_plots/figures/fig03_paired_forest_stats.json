@@ -1,0 +1,191 @@
+{
+  "figure": "fig03_paired_forest",
+  "checkpoint": 1000000,
+  "B_hierarchical": 10000,
+  "seed_pairing_method_rows_4_6": "independent per-architecture resampling of 5 learner seeds (arch_seeds={'a': [...], 'b': [...]}, two independently-drawn keys); holdout paths resampled once per replicate and shared across both sides (pathwise pairing preserved).",
+  "rows": [
+    {
+      "label": "Belief-state PPO - Belief-weighted analytical policy",
+      "group": "benchmark",
+      "cross_mean": -3.568026147410882,
+      "cross_ci": [
+        -7.675912141315327,
+        0.5703903866761841
+      ]
+    },
+    {
+      "label": "Raw-return MLP PPO - Belief-weighted analytical policy",
+      "group": "benchmark",
+      "cross_mean": -0.9833211026639536,
+      "cross_ci": [
+        -10.828967639682118,
+        9.899625802994278
+      ]
+    },
+    {
+      "label": "Raw-return LSTM PPO - Belief-weighted analytical policy",
+      "group": "benchmark",
+      "cross_mean": -2.8620800857283633,
+      "cross_ci": [
+        -9.246043774763935,
+        5.181824021640502
+      ]
+    },
+    {
+      "label": "Belief-state PPO - Raw-return MLP PPO",
+      "group": "pair",
+      "cross_mean": -2.5847050447469258,
+      "cross_ci": [
+        -13.687728024532548,
+        7.733472995693973
+      ]
+    },
+    {
+      "label": "Belief-state PPO - Raw-return LSTM PPO",
+      "group": "pair",
+      "cross_mean": -0.7059460616825177,
+      "cross_ci": [
+        -9.3024806170707,
+        6.4095526482154375
+      ]
+    },
+    {
+      "label": "Raw-return LSTM PPO - Raw-return MLP PPO",
+      "group": "pair",
+      "cross_mean": -1.878758983064408,
+      "cross_ci": [
+        -9.20964854921338,
+        2.938376953091765
+      ]
+    }
+  ],
+  "crosscheck": [
+    {
+      "row": "hamilton_ppo vs belief_weighted seed 0 (mean)",
+      "mine": -3.986282232412661,
+      "reference": -3.986282232412661,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "hamilton_ppo vs belief_weighted seed 1 (mean)",
+      "mine": -2.367195435143256,
+      "reference": -2.367195435143256,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "hamilton_ppo vs belief_weighted seed 2 (mean)",
+      "mine": -3.729014467593687,
+      "reference": -3.729014467593687,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "hamilton_ppo vs belief_weighted seed 3 (mean)",
+      "mine": -5.454062680356719,
+      "reference": -5.454062680356719,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "hamilton_ppo vs belief_weighted seed 4 (mean)",
+      "mine": -2.3035759215480858,
+      "reference": -2.3035759215480858,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "return_mlp_ppo vs belief_weighted seed 0 (mean)",
+      "mine": 0.40571066810088585,
+      "reference": 0.4057106681008858,
+      "abs_diff": 5.551115123125783e-17,
+      "within_tol": true
+    },
+    {
+      "row": "return_mlp_ppo vs belief_weighted seed 1 (mean)",
+      "mine": -4.716487323707659,
+      "reference": -4.716487323707659,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "return_mlp_ppo vs belief_weighted seed 2 (mean)",
+      "mine": -2.423938076723944,
+      "reference": -2.423938076723944,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "return_mlp_ppo vs belief_weighted seed 3 (mean)",
+      "mine": 2.603683103830897,
+      "reference": 2.603683103830897,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "return_mlp_ppo vs belief_weighted seed 4 (mean)",
+      "mine": -0.7855738848199478,
+      "reference": -0.7855738848199478,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "return_lstm_ppo vs belief_weighted seed 0 (mean)",
+      "mine": 0.8296011180906294,
+      "reference": 0.8296011180906294,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "return_lstm_ppo vs belief_weighted seed 1 (mean)",
+      "mine": -4.921105967337523,
+      "reference": -4.921105967337523,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "return_lstm_ppo vs belief_weighted seed 2 (mean)",
+      "mine": -8.176094502120396,
+      "reference": -8.176094502120396,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "return_lstm_ppo vs belief_weighted seed 3 (mean)",
+      "mine": -2.1636574486163496,
+      "reference": -2.1636574486163496,
+      "abs_diff": 0.0,
+      "within_tol": true
+    },
+    {
+      "row": "return_lstm_ppo vs belief_weighted seed 4 (mean)",
+      "mine": 0.12085637134182252,
+      "reference": 0.1208563713418225,
+      "abs_diff": 1.3877787807814457e-17,
+      "within_tol": true
+    },
+    {
+      "row": "hamilton_ppo vs return_mlp_ppo (cross-seed mean, point estimate only -- CI method differs by design)",
+      "mine": -2.5847050447469258,
+      "reference": -2.5847050447469213,
+      "abs_diff": 4.440892098500626e-15,
+      "within_tol": true
+    },
+    {
+      "row": "hamilton_ppo vs return_lstm_ppo (cross-seed mean, point estimate only -- CI method differs by design)",
+      "mine": -0.7059460616825177,
+      "reference": -0.7059460616825163,
+      "abs_diff": 1.4432899320127035e-15,
+      "within_tol": true
+    },
+    {
+      "row": "return_lstm_ppo vs return_mlp_ppo (cross-seed mean, point estimate only -- CI method differs by design)",
+      "mine": -1.878758983064408,
+      "reference": -1.8787589830644047,
+      "abs_diff": 3.3306690738754696e-15,
+      "within_tol": true
+    }
+  ],
+  "crosscheck_n_mismatches": 0
+}

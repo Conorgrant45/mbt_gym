@@ -1,2 +1,0 @@
-selected_init_seed,selected_epoch,train_mse,val_mse,test_mse,bid_test_mse,ask_test_mse,max_test_error,frac_test_outputs_near_bound,n_train,n_val,n_test
-1,76,4.078666279383469e-06,2.6570692170935217e-06,2.8008889785269275e-06,2.700598543015076e-06,2.90117986878613e-06,0.014191985130310059,0.0,28343,8448,11153

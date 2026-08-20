@@ -1,0 +1,11 @@
+{
+  "figure": "fig06_trajectory_mechanism",
+  "path_seed": 290000,
+  "learner_seed": 0,
+  "checkpoint": 1000000,
+  "n_events": 290,
+  "n_regime_switches": 10,
+  "n_bid_fills": 32,
+  "n_ask_fills": 15,
+  "note": "Illustrative single-episode mechanism figure (n=1 path), not a statistically powered result."
+}

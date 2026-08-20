@@ -57,6 +57,16 @@ DT = STEP_SIZE
 N_STEPS      = 1000
 MIN_SWITCHES = 2
 
+# ------------------------------------------------------------------
+# Thesis-wide colour scheme (regime plots): midprice/belief line in blue,
+# calm-regime shading in light grey, adverse-selection-regime shading in
+# darker grey, shading alpha in [0.35, 0.50] and kept behind the data.
+# ------------------------------------------------------------------
+COLOR_BELIEF        = "#0072B2"
+COLOR_REGIME0_SHADE = "#D9D9D9"
+COLOR_REGIME1_SHADE = "#969696"
+SHADE_ALPHA         = 0.40
+
 
 def simulate_regime_path(P, n_steps, seed):
     """Sample a regime path via the Markov chain, starting in regime 0."""
@@ -206,15 +216,23 @@ def run_case(sigma0, sigma1, label, seed, r=1):
     return steps, regimes, beliefs, returns
 
 
-def shade_regime1(ax, steps, regime):
-    in_r1 = np.where(regime == 1)[0]
-    if len(in_r1) == 0:
+def _shade_spans(ax, steps, mask, color):
+    idx = np.where(mask)[0]
+    if len(idx) == 0:
         return
-    starts = in_r1[np.concatenate(([True], np.diff(in_r1) > 1))]
-    ends   = in_r1[np.concatenate((np.diff(in_r1) > 1, [True]))]
+    starts = idx[np.concatenate(([True], np.diff(idx) > 1))]
+    ends   = idx[np.concatenate((np.diff(idx) > 1, [True]))]
     for s, e in zip(starts, ends):
-        ax.axvspan(steps[s], steps[min(e+1, len(steps)-1)],
-                   alpha=0.10, color='tomato', label='_nolegend_')
+        ax.axvspan(steps[s], steps[min(e + 1, len(steps) - 1)],
+                   alpha=SHADE_ALPHA, color=color, zorder=0, label='_nolegend_')
+
+
+def shade_regimes(ax, steps, regime):
+    """Background shading for BOTH regimes (calm = light grey, adverse-
+    selection = darker grey), drawn at zorder=0 so it always sits behind
+    the data plotted on top of it."""
+    _shade_spans(ax, steps, regime == 0, COLOR_REGIME0_SHADE)
+    _shade_spans(ax, steps, regime == 1, COLOR_REGIME1_SHADE)
 
 
 def main():
@@ -238,13 +256,20 @@ def main():
 
     # ------------------------------------------------------------------
     # Plot: 2x3 grid, one column per case
+    #
+    # No figure suptitle -- a caption is added locally in LaTeX. The
+    # per-column 'Case A'/'Case B' headers are kept: they are the only
+    # place sigma_1 for that column is identified, not a redundant
+    # restatement of an overall figure description.
     # ------------------------------------------------------------------
     fig, axes = plt.subplots(3, 2, figsize=(14, 10))
-    fig.suptitle(
-        'Hamilton filter diagnostic: \n'
-        f'Pure synthetic Gaussian returns, no mbt_gym, r={args.r}',
-        fontsize=11
-    )
+
+    # Common y-axis for the Return row across both columns (a common axis
+    # is required to make the sigma_1=0.10 vs sigma_1=0.03 volatility
+    # difference visually comparable -- independent auto-scaling per
+    # column hides it, since each column then just fills its own range).
+    return_abs_max = max(np.abs(returns_a).max(), np.abs(returns_b).max())
+    return_ylim = (-1.05 * return_abs_max, 1.05 * return_abs_max)
 
     for col, (steps, regimes, beliefs, returns, label, sigma1) in enumerate([
         (steps_a, regimes_a, beliefs_a, returns_a, 'Case A ($\\sigma_1=0.10$)', 0.10),
@@ -254,33 +279,34 @@ def main():
 
         # Row 0: True regime
         ax = axes[0, col]
-        ax.step(steps, regimes, where='post', color='black', linewidth=1.5)
-        ax.fill_between(steps, regimes, step='post', alpha=0.12, color='tomato')
+        shade_regimes(ax, steps, regimes)
+        ax.step(steps, regimes, where='post', color='black', linewidth=1.5, zorder=2)
         ax.set_ylabel('Regime', fontsize=9)
         ax.set_yticks([0, 1])
         ax.set_yticklabels(['0', '1'], fontsize=8)
         ax.set_ylim(-0.1, 1.4)
         ax.set_title(label, fontsize=10)
-        ax.grid(True, alpha=0.2)
+        ax.grid(True, alpha=0.3, color='lightgrey')
         ax.set_xlim(xlim)
         ax.tick_params(labelbottom=False)
 
-        # Row 1: Returns
+        # Row 1: Returns (common y-axis across columns -- see return_ylim above)
         ax = axes[1, col]
-        ax.plot(steps, returns, color='grey', linewidth=0.6, alpha=0.8)
-        ax.axhline(0, color='black', linewidth=0.5)
-        shade_regime1(ax, steps, regimes)
+        shade_regimes(ax, steps, regimes)
+        ax.plot(steps, returns, color='grey', linewidth=0.6, alpha=0.8, zorder=2)
+        ax.axhline(0, color='black', linewidth=0.5, zorder=2)
         ax.set_ylabel('Return $r_t$', fontsize=9)
-        ax.grid(True, alpha=0.2)
+        ax.set_ylim(return_ylim)
+        ax.grid(True, alpha=0.3, color='lightgrey')
         ax.set_xlim(xlim)
         ax.tick_params(labelbottom=False)
 
         # Row 2: Belief
         ax = axes[2, col]
-        ax.plot(steps, beliefs, color='steelblue', linewidth=1.5,
-                label=r'$\pi_t$')
-        ax.axhline(0.5, color='grey', linestyle=':', linewidth=0.8)
-        shade_regime1(ax, steps, regimes)
+        shade_regimes(ax, steps, regimes)
+        ax.plot(steps, beliefs, color=COLOR_BELIEF, linewidth=1.5,
+                label=r'$\pi_t$', zorder=2)
+        ax.axhline(0.5, color='grey', linestyle=':', linewidth=0.8, zorder=2)
         ax.set_ylabel(r'Belief $\pi_t$', fontsize=9)
         ax.set_xlabel('Step', fontsize=9)
         ax.set_ylim(-0.05, 1.05)
@@ -290,8 +316,8 @@ def main():
         ax.text(0.02, 0.06,
                 f'Acc: {acc:.2f}   Belief|r=1: {mb1:.2f}   Belief|r=0: {mb0:.2f}',
                 transform=ax.transAxes, fontsize=8,
-                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
-        ax.grid(True, alpha=0.2)
+                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8), zorder=3)
+        ax.grid(True, alpha=0.3, color='lightgrey')
         ax.set_xlim(xlim)
 
     plt.tight_layout()

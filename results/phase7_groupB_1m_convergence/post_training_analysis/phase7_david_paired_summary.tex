@@ -1,0 +1,28 @@
+\begin{table}
+\caption{Paired differences between aggregate Hamilton PPO and each benchmark on 500 common unseen market paths. Differences are defined as Hamilton PPO minus the benchmark.}
+\label{tab:phase7-unseen-paired-comparisons}
+\begin{tabular}{lccccccccl}
+\toprule
+Benchmark & Mean difference & Standard error & 95\% CI lower & 95\% CI upper & Bootstrap CI lower & Bootstrap CI upper & PPO win rate & Verdict \\
+\midrule
+Belief-weighted policy & -6.19 & 1.97 & -10.05 & -2.34 & -10.04 & -2.38 & 39.80 & hamilton\_ppo\_seed0 falls below belief\_weighted (CI excludes zero, negative) \\
+Analytical oracle & -6.26 & 1.96 & -10.10 & -2.42 & -10.08 & -2.45 & 40.00 & hamilton\_ppo\_seed0 falls below oracle (CI excludes zero, negative) \\
+Frozen supervised clone & -6.23 & 1.97 & -10.09 & -2.37 & -10.07 & -2.42 & 40.20 & hamilton\_ppo\_seed0 falls below frozen\_clone (CI excludes zero, negative) \\
+Belief-weighted policy & -7.98 & 1.95 & -11.80 & -4.15 & -11.74 & -4.26 & 37.80 & hamilton\_ppo\_seed1 falls below belief\_weighted (CI excludes zero, negative) \\
+Analytical oracle & -8.04 & 1.94 & -11.85 & -4.23 & -11.79 & -4.35 & 38.40 & hamilton\_ppo\_seed1 falls below oracle (CI excludes zero, negative) \\
+Frozen supervised clone & -8.01 & 1.95 & -11.83 & -4.19 & -11.78 & -4.30 & 38.00 & hamilton\_ppo\_seed1 falls below frozen\_clone (CI excludes zero, negative) \\
+Belief-weighted policy & -9.45 & 1.76 & -12.89 & -6.01 & -12.86 & -6.10 & 33.80 & hamilton\_ppo\_seed2 falls below belief\_weighted (CI excludes zero, negative) \\
+Analytical oracle & -9.52 & 1.76 & -12.96 & -6.08 & -12.91 & -6.13 & 33.40 & hamilton\_ppo\_seed2 falls below oracle (CI excludes zero, negative) \\
+Frozen supervised clone & -9.49 & 1.75 & -12.91 & -6.07 & -12.87 & -6.13 & 33.60 & hamilton\_ppo\_seed2 falls below frozen\_clone (CI excludes zero, negative) \\
+Belief-weighted policy & -9.21 & 1.83 & -12.80 & -5.61 & -12.76 & -5.71 & 36.60 & hamilton\_ppo\_seed3 falls below belief\_weighted (CI excludes zero, negative) \\
+Analytical oracle & -9.27 & 1.83 & -12.86 & -5.68 & -12.84 & -5.77 & 36.20 & hamilton\_ppo\_seed3 falls below oracle (CI excludes zero, negative) \\
+Frozen supervised clone & -9.24 & 1.83 & -12.82 & -5.65 & -12.78 & -5.74 & 36.60 & hamilton\_ppo\_seed3 falls below frozen\_clone (CI excludes zero, negative) \\
+Belief-weighted policy & -8.73 & 1.79 & -12.24 & -5.22 & -12.19 & -5.25 & 35.60 & hamilton\_ppo\_seed4 falls below belief\_weighted (CI excludes zero, negative) \\
+Analytical oracle & -8.79 & 1.79 & -12.30 & -5.28 & -12.26 & -5.36 & 36.20 & hamilton\_ppo\_seed4 falls below oracle (CI excludes zero, negative) \\
+Frozen supervised clone & -8.76 & 1.79 & -12.26 & -5.26 & -12.19 & -5.31 & 36.00 & hamilton\_ppo\_seed4 falls below frozen\_clone (CI excludes zero, negative) \\
+Belief-weighted policy & -8.31 & 1.65 & -11.55 & -5.08 & -11.53 & -5.14 & 35.20 & hamilton\_ppo\_5seed\_aggregate falls below belief\_weighted (CI excludes zero, negative) \\
+Analytical oracle & -8.37 & 1.65 & -11.60 & -5.15 & -11.58 & -5.24 & 36.00 & hamilton\_ppo\_5seed\_aggregate falls below oracle (CI excludes zero, negative) \\
+Frozen supervised clone & -8.34 & 1.65 & -11.57 & -5.12 & -11.53 & -5.18 & 35.20 & hamilton\_ppo\_5seed\_aggregate falls below frozen\_clone (CI excludes zero, negative) \\
+\bottomrule
+\end{tabular}
+\end{table}

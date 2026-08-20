@@ -1,0 +1,11 @@
+{
+  "brier_score": 0.001572045199605104,
+  "n_paths": 5000,
+  "n_events": 1400687,
+  "n_switches_detected": 28049,
+  "seed_range": [
+    300000,
+    304999
+  ],
+  "n_reliability_bins": 20
+}

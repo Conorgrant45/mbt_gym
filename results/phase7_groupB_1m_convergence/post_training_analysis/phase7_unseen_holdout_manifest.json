@@ -1,0 +1,206 @@
+{
+  "created_at": "2026-07-29T15:13:53",
+  "git_commit": "6e2a3d622cb6a68d0c3714298ec7df58bdd19164",
+  "dependency_versions": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "gym": "0.26.2",
+    "gymnasium": "1.2.3",
+    "stable_baselines3": "2.8.0",
+    "sb3_contrib": "2.8.0",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.2.4",
+    "pandas": "3.0.0"
+  },
+  "frozen_selected_checkpoints": {
+    "0": {
+      "timestep": 1000000,
+      "det_mean_objective": 47.61094960691963,
+      "det_se_objective": 7.6476135344735825,
+      "checkpoint_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed0\\ppo_hamilton_ppo_groupB_seed0_t001000000.zip"
+    },
+    "1": {
+      "timestep": 800000,
+      "det_mean_objective": 49.6464916676855,
+      "det_se_objective": 8.54069409579522,
+      "checkpoint_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed1\\ppo_hamilton_ppo_groupB_seed1_t000800000.zip"
+    },
+    "2": {
+      "timestep": 400000,
+      "det_mean_objective": 46.99641862849026,
+      "det_se_objective": 7.931991059242203,
+      "checkpoint_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed2\\ppo_hamilton_ppo_groupB_seed2_t000400000.zip"
+    },
+    "3": {
+      "timestep": 900000,
+      "det_mean_objective": 48.68643049771324,
+      "det_se_objective": 7.653956701237963,
+      "checkpoint_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed3\\ppo_hamilton_ppo_groupB_seed3_t000900000.zip"
+    },
+    "4": {
+      "timestep": 400000,
+      "det_mean_objective": 47.51976396218824,
+      "det_se_objective": 7.822478198270346,
+      "checkpoint_path": "C:\\Users\\conor\\OneDrive\\Documents\\Edinburgh master\\Dissertation\\Python\\mbt_gym\\models\\phase7_groupB_1m_convergence\\groupB_seed4\\ppo_hamilton_ppo_groupB_seed4_t000400000.zip"
+    }
+  },
+  "selection_rule": "argmax deterministic mean validation objective (phase7_checkpoint_summary.csv, Phase 7's own fixed 50-seed validation set 260000-260049), tie broken toward earlier timestep -- IDENTICAL rule to Phase 6, applied post-hoc since Phase 7 itself never froze a selection. Holdout data was never used for this selection.",
+  "new_holdout_seed_start": 270000,
+  "new_holdout_seed_count": 500,
+  "new_holdout_disjoint_check": {
+    "disjoint": true,
+    "n_new_holdout_seeds": 500,
+    "overlaps": {}
+  },
+  "prior_seed_ranges_checked": {
+    "learner_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "training_env_seed": [
+      70000
+    ],
+    "dev_monitor_eval_seeds (train_hamilton_ppo.py/train_agents.py DEFAULT_EVAL_SEEDS)": [
+      90001,
+      90002,
+      90003,
+      90004,
+      90005
+    ],
+    "fixed_offline_selection_validation (select_checkpoint_offline.py example)": [
+      91001,
+      91002,
+      91003,
+      "...",
+      91048,
+      91049,
+      91050
+    ],
+    "hamilton_ppo_eval_lib.HOLDOUT_SEEDS": [
+      100000,
+      100001,
+      100002,
+      "...",
+      100197,
+      100198,
+      100199
+    ],
+    "multiseed_holdout (evaluate_hamilton_ppo_multiseed_holdout.py)": [
+      110000,
+      110001,
+      110002,
+      "...",
+      110097,
+      110098,
+      110099
+    ],
+    "evaluate_agents_common.DEFAULT_HOLDOUT_SEEDS": [
+      120000,
+      120001,
+      120002,
+      "...",
+      120097,
+      120098,
+      120099
+    ],
+    "evaluate_agents_event_driven.DEFAULT_HOLDOUT_SEEDS": [
+      130000,
+      130001,
+      130002,
+      "...",
+      130097,
+      130098,
+      130099
+    ],
+    "phase3_event_driven_validation": [
+      195001,
+      195002,
+      195003,
+      "...",
+      195048,
+      195049,
+      195050
+    ],
+    "phase3_holdout": [
+      200000,
+      200001,
+      200002,
+      "...",
+      200197,
+      200198,
+      200199
+    ],
+    "phase4_diagnostic_validation_seeds": [
+      210000,
+      210001,
+      210002,
+      "...",
+      210047,
+      210048,
+      210049
+    ],
+    "phase4_supervised_clone_train_val_test": [
+      220000,
+      220001,
+      220002,
+      "...",
+      222997,
+      222998,
+      222999
+    ],
+    "phase4_policy_evaluation_seeds": [
+      225001,
+      225002,
+      225003,
+      "...",
+      225048,
+      225049,
+      225050
+    ],
+    "phase5_diagnostic_validation_seeds": [
+      230000,
+      230001,
+      230002,
+      "...",
+      230017,
+      230018,
+      230019
+    ],
+    "phase5_critic_gae_diagnostic_env_seed": [
+      231000
+    ],
+    "phase6_validation_seeds": [
+      240000,
+      240001,
+      240002,
+      "...",
+      240047,
+      240048,
+      240049
+    ],
+    "phase6_holdout_seeds": [
+      250000,
+      250001,
+      250002,
+      "...",
+      250197,
+      250198,
+      250199
+    ],
+    "phase7_validation_seeds": [
+      260000,
+      260001,
+      260002,
+      "...",
+      260047,
+      260048,
+      260049
+    ]
+  },
+  "n_episodes_total": 4000,
+  "max_reward_reconciliation_error": 2.5579538487363607e-13,
+  "elapsed_seconds": 1249.5566902160645
+}

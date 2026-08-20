@@ -1,0 +1,7 @@
+{
+  "figure": "midprice_path",
+  "path_seed": 290000,
+  "n_events": 290,
+  "regime_0_volatility_multiplier": 120.0,
+  "note": "NOT the calibrated simulation if regime_0_volatility_multiplier != 1.0 -- regime-0 diffusion volatility was deliberately inflated for visual clarity only."
+}

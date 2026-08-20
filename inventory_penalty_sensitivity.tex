@@ -1,0 +1,124 @@
+\subsection{Inventory-Penalty Sensitivity}
+\label{subsec:inventory-penalty-sensitivity}
+
+The running inventory penalty $\phi$ was increased from $0.01$ to $0.10$ and the terminal inventory penalty $\alpha$ was increased from $0.001$ to $0.010$, a uniform tenfold increase of both parameters that preserves their original relative weighting. All three PPO architectures (Hamilton belief-state MLP, raw-return MLP, raw-return LSTM) were retrained from scratch under this higher-penalty reward, and the regime-conditioned analytical policy, the belief-weighted analytical policy, and the frozen supervised clone were all recomputed against the higher-penalty calibration.
+
+Every other environment parameter (fill-decay $\kappa$, arrival intensity $\lambda$, adverse-selection jump size $\epsilon$, regime volatilities, transition generator, terminal time), every PPO/RecurrentPPO hyperparameter (learning rate, rollout length, mini-batch size, number of epochs, discount factor, GAE parameter, clipping range, initial policy standard deviation), the network architecture, the training budget ($1{,}000{,}000$ observable-event transitions per run), the number of learner seeds (5 per architecture), the training-environment seed, and the 500-path holdout evaluation set (identical paths/seeds to the original calibration) were held fixed between the two calibrations.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Policy & Mean $|Q|$ & $\int Q^2\,dt$ & RMS $Q$ & Max $|Q|$ & $|Q_T|$ & $Q_T^2$ & Running penalty & Terminal penalty \\
+\midrule
+Hamilton belief-state MLP & 4.213 (1.397) & 34.952 (20.967) & 4.910 (1.580) & 8.952 (2.608) & 6.073 (2.787) & 66.142 (48.792) & 3.495 (2.097) & 0.661 (0.488) \\
+Raw-return MLP & 5.031 (1.193) & 46.346 (19.154) & 5.774 (1.305) & 9.832 (1.952) & 7.840 (2.194) & 95.420 (47.278) & 4.635 (1.915) & 0.954 (0.473) \\
+Raw-return LSTM & 4.473 (1.709) & 42.196 (31.824) & 5.267 (1.999) & 9.686 (3.426) & 7.606 (3.965) & 102.881 (94.443) & 4.220 (3.182) & 1.029 (0.944) \\
+Oracle & 1.978 & 6.572 & 2.448 & 5.600 & 2.454 & 9.694 & 0.657 & 0.097 \\
+Belief-weighted & 1.977 & 6.560 & 2.446 & 5.604 & 2.468 & 9.764 & 0.656 & 0.098 \\
+Supervised clone & 1.985 & 6.632 & 2.455 & 5.612 & 2.426 & 9.446 & 0.663 & 0.094 \\
+\bottomrule
+\end{tabular}
+\caption{Higher-penalty calibration ($\phi=0.10$, $\alpha=0.010$) holdout inventory results, 500 holdout paths per policy. PPO rows report the cross-seed mean over 5 learner seeds, with the cross-seed standard deviation in parentheses; reference-policy rows (Oracle, Belief-weighted, Supervised clone) have no learner-seed dimension.}
+\label{tab:ips-high-penalty-inventory}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{llrrrrr}
+\toprule
+Policy & Calibration & Mean $|Q|$ & $\int Q^2\,dt$ & RMS $Q$ & Running penalty & Terminal penalty \\
+\midrule
+Hamilton belief-state MLP & $\phi=0.01,\alpha=0.001$ & 4.771 & 43.424 & 5.696 & 0.434 & 0.121 \\
+ & $\phi=0.10,\alpha=0.010$ & 4.213 & 34.952 & 4.910 & 3.495 & 0.661 \\
+\addlinespace
+Raw-return MLP & $\phi=0.01,\alpha=0.001$ & 9.450 & 157.737 & 10.884 & 1.577 & 0.379 \\
+ & $\phi=0.10,\alpha=0.010$ & 5.031 & 46.346 & 5.774 & 4.635 & 0.954 \\
+\addlinespace
+Raw-return LSTM & $\phi=0.01,\alpha=0.001$ & 7.107 & 89.959 & 8.108 & 0.900 & 0.179 \\
+ & $\phi=0.10,\alpha=0.010$ & 4.473 & 42.196 & 5.267 & 4.220 & 1.029 \\
+\addlinespace
+Oracle & $\phi=0.01,\alpha=0.001$ & 3.161 & 17.555 & 3.798 & 0.176 & 0.033 \\
+ & $\phi=0.10,\alpha=0.010$ & 1.978 & 6.572 & 2.448 & 0.657 & 0.097 \\
+\addlinespace
+Belief-weighted & $\phi=0.01,\alpha=0.001$ & 3.147 & 17.426 & 3.784 & 0.174 & 0.033 \\
+ & $\phi=0.10,\alpha=0.010$ & 1.977 & 6.560 & 2.446 & 0.656 & 0.098 \\
+\addlinespace
+Supervised clone & $\phi=0.01,\alpha=0.001$ & 3.144 & 17.390 & 3.777 & 0.174 & 0.033 \\
+ & $\phi=0.10,\alpha=0.010$ & 1.985 & 6.632 & 2.455 & 0.663 & 0.094 \\
+\addlinespace
+\bottomrule
+\end{tabular}
+\caption{Original- vs.\ higher-penalty inventory values by policy (cross-seed mean for the 3 PPO architectures over 5 learner seeds; single evaluation for the 3 reference policies), 500 holdout paths, identical exogenous paths under both calibrations.}
+\label{tab:ips-original-vs-high-penalty}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{llrrr}
+\toprule
+Policy & Metric & Mean diff.\ (high $-$ orig.) & SE & $n$ seeds \\
+\midrule
+Hamilton belief-state MLP & Mean signed $Q$ (time-avg.) & 1.339 & 0.646 & 5 \\
+Hamilton belief-state MLP & Mean $|Q|$ (time-avg.) & -0.557 & 0.783 & 5 \\
+Hamilton belief-state MLP & $\int Q^2\,dt$ & -8.472 & 12.407 & 5 \\
+Hamilton belief-state MLP & RMS $Q$ & -0.786 & 0.886 & 5 \\
+Hamilton belief-state MLP & Max $|Q|$ & -1.893 & 1.445 & 5 \\
+Hamilton belief-state MLP & $Q_T$ & 1.632 & 1.464 & 5 \\
+Hamilton belief-state MLP & $|Q_T|$ & -3.023 & 1.470 & 5 \\
+Hamilton belief-state MLP & $Q_T^2$ & -54.887 & 29.140 & 5 \\
+Hamilton belief-state MLP & Total fills & 0.844 & 4.308 & 5 \\
+Raw-return MLP & Mean signed $Q$ (time-avg.) & 8.865 & 2.157 & 5 \\
+Raw-return MLP & Mean $|Q|$ (time-avg.) & -4.419 & 1.053 & 5 \\
+Raw-return MLP & $\int Q^2\,dt$ & -111.392 & 40.450 & 5 \\
+Raw-return MLP & RMS $Q$ & -5.110 & 1.375 & 5 \\
+Raw-return MLP & Max $|Q|$ & -8.394 & 2.905 & 5 \\
+Raw-return MLP & $Q_T$ & 15.373 & 4.314 & 5 \\
+Raw-return MLP & $|Q_T|$ & -8.295 & 3.492 & 5 \\
+Raw-return MLP & $Q_T^2$ & -283.892 & 147.404 & 5 \\
+Raw-return MLP & Total fills & -12.041 & 5.086 & 5 \\
+Raw-return LSTM & Mean signed $Q$ (time-avg.) & 6.202 & 1.321 & 5 \\
+Raw-return LSTM & Mean $|Q|$ (time-avg.) & -2.634 & 2.117 & 5 \\
+Raw-return LSTM & $\int Q^2\,dt$ & -47.763 & 41.310 & 5 \\
+Raw-return LSTM & RMS $Q$ & -2.842 & 2.373 & 5 \\
+Raw-return LSTM & Max $|Q|$ & -3.867 & 3.644 & 5 \\
+Raw-return LSTM & $Q_T$ & 9.237 & 2.128 & 5 \\
+Raw-return LSTM & $|Q_T|$ & -3.436 & 3.678 & 5 \\
+Raw-return LSTM & $Q_T^2$ & -76.375 & 91.582 & 5 \\
+Raw-return LSTM & Total fills & -5.938 & 6.221 & 5 \\
+Oracle & Mean signed $Q$ (time-avg.) & -0.107 & 0.082 & 1 \\
+Oracle & Mean $|Q|$ (time-avg.) & -1.183 & 0.050 & 1 \\
+Oracle & $\int Q^2\,dt$ & -10.983 & 0.648 & 1 \\
+Oracle & RMS $Q$ & -1.351 & 0.055 & 1 \\
+Oracle & Max $|Q|$ & -2.256 & 0.091 & 1 \\
+Oracle & $Q_T$ & -0.170 & 0.168 & 1 \\
+Oracle & $|Q_T|$ & -2.138 & 0.126 & 1 \\
+Oracle & $Q_T^2$ & -23.398 & 1.753 & 1 \\
+Oracle & Total fills & -0.986 & 0.106 & 1 \\
+Belief-weighted & Mean signed $Q$ (time-avg.) & -0.116 & 0.081 & 1 \\
+Belief-weighted & Mean $|Q|$ (time-avg.) & -1.170 & 0.050 & 1 \\
+Belief-weighted & $\int Q^2\,dt$ & -10.865 & 0.640 & 1 \\
+Belief-weighted & RMS $Q$ & -1.338 & 0.055 & 1 \\
+Belief-weighted & Max $|Q|$ & -2.240 & 0.090 & 1 \\
+Belief-weighted & $Q_T$ & -0.180 & 0.167 & 1 \\
+Belief-weighted & $|Q_T|$ & -2.124 & 0.125 & 1 \\
+Belief-weighted & $Q_T^2$ & -23.208 & 1.738 & 1 \\
+Belief-weighted & Total fills & -1.008 & 0.105 & 1 \\
+Supervised clone & Mean signed $Q$ (time-avg.) & -0.120 & 0.080 & 1 \\
+Supervised clone & Mean $|Q|$ (time-avg.) & -1.159 & 0.050 & 1 \\
+Supervised clone & $\int Q^2\,dt$ & -10.758 & 0.637 & 1 \\
+Supervised clone & RMS $Q$ & -1.322 & 0.055 & 1 \\
+Supervised clone & Max $|Q|$ & -2.214 & 0.089 & 1 \\
+Supervised clone & $Q_T$ & -0.162 & 0.167 & 1 \\
+Supervised clone & $|Q_T|$ & -2.158 & 0.124 & 1 \\
+Supervised clone & $Q_T^2$ & -23.386 & 1.722 & 1 \\
+Supervised clone & Total fills & -0.974 & 0.108 & 1 \\
+\bottomrule
+\end{tabular}
+\caption{Paired high-penalty-minus-original differences in unpenalised inventory-behaviour metrics, 500 identical holdout paths under both calibrations. For the 3 PPO architectures, per-seed paired differences (5 learner seeds, fixed 1,000,000-transition checkpoint) are averaged and the standard error is computed across those 5 seed-level differences; reference policies have a single paired difference over the 500 paths, with its own path-level standard error.}
+\label{tab:ips-paired-diffs}
+\end{table}
+
