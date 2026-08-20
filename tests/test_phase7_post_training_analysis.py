@@ -131,7 +131,7 @@ EXISTING_PHASE7_FILES = [
     "phase7_benchmark_on_own_validation_seeds.csv", "phase7_checkpoint_summary.csv",
     "phase7_config_manifest.json", "phase7_group_summary.csv", "phase7_run_status.csv",
     "phase7_seed_summary.csv", "phase7_time_to_benchmark.csv", "phase7_time_to_benchmark.png",
-    "phase7_time_to_benchmark_summary.md", "phase7_training_diagnostics.csv",
+    "phase7_training_diagnostics.csv",
 ]
 
 
