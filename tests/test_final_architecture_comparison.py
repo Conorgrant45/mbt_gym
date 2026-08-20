@@ -23,10 +23,10 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import final_common as FC
-import final_episode_runner as ER
-from final_instrumented_ppo import FinalInstrumentedPPO, FinalInstrumentedRecurrentPPO
-import final_analyze_contrasts as FAC
+import final.final_common as FC
+import final.final_episode_runner as ER
+from final.final_instrumented_ppo import FinalInstrumentedPPO, FinalInstrumentedRecurrentPPO
+import final.final_analyze_contrasts as FAC
 
 REPO_ROOT = FC.REPO_ROOT
 
@@ -122,7 +122,7 @@ def test_episode_schema_and_reward_reconciliation_ppo(architecture):
 
 @pytest.mark.parametrize("policy_name", ["oracle", "belief_weighted"])
 def test_episode_schema_and_reward_reconciliation_benchmarks(policy_name):
-    import phase4_common as P4
+    import shared.phase4_common as P4
     controls = P4.build_analytical_controls()
     row = ER.evaluate_benchmark_row(policy_name, controls, seed=999_002)
     missing = REQUIRED_EPISODE_FIELDS - set(row.keys())

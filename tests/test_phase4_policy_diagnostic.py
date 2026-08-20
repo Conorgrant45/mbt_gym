@@ -14,11 +14,11 @@ import numpy as np
 import pytest
 import torch
 
-import phase4_common as P4
-import simulate_belief_weighted as SBW
+import shared.phase4_common as P4
+import shared.simulate_belief_weighted as SBW
 from envs.event_driven_hamilton_ppo_wrapper import EventDrivenHamiltonPPOWrapper
 from envs.hamilton_ppo_wrapper import HamiltonPPOWrapper
-from phase4_supervised_clone import build_mlp, SupervisedCloneAgent, collect_dataset
+from shared.phase4_supervised_clone import build_mlp, SupervisedCloneAgent, collect_dataset
 
 
 # ======================================================================
@@ -145,7 +145,7 @@ def test_clone_agent_reward_reconciliation_holds():
     would be the first thing to break -- run one episode through the SAME
     evaluate_agents_common runner and confirm reconciliation still holds to
     machine precision."""
-    import evaluate_agents_common as EAC
+    import shared.evaluate_agents_common as EAC
     net = build_mlp(seed=0)
     clone = SupervisedCloneAgent(net)
     m = EAC.run_hamilton_agent_episode(clone, seed=999_101)
@@ -153,7 +153,7 @@ def test_clone_agent_reward_reconciliation_holds():
 
 
 def test_clone_agent_event_driven_reward_reconciliation_holds():
-    import evaluate_agents_event_driven as EAED
+    import shared.evaluate_agents_event_driven as EAED
     net = build_mlp(seed=0)
     clone = SupervisedCloneAgent(net)
     m = EAED.run_event_hamilton_agent_episode(clone, seed=999_102)
@@ -204,7 +204,7 @@ def test_diagnostic_seeds_disjoint_from_all_previous_ranges():
     for prev in previous_ranges:
         assert eval_seeds.isdisjoint(prev)
 
-    from phase4_supervised_clone import SEED_TRAIN_START, SEED_VAL_START, SEED_TEST_START, N_TRAIN_EPISODES, N_VAL_EPISODES, N_TEST_EPISODES
+    from shared.phase4_supervised_clone import SEED_TRAIN_START, SEED_VAL_START, SEED_TEST_START, N_TRAIN_EPISODES, N_VAL_EPISODES, N_TEST_EPISODES
     clone_seeds = (set(range(SEED_TRAIN_START, SEED_TRAIN_START + N_TRAIN_EPISODES))
                    | set(range(SEED_VAL_START, SEED_VAL_START + N_VAL_EPISODES))
                    | set(range(SEED_TEST_START, SEED_TEST_START + N_TEST_EPISODES)))
@@ -216,7 +216,7 @@ def test_diagnostic_seeds_disjoint_from_all_previous_ranges():
 # Item 10: evaluation order invariance
 # ======================================================================
 def test_evaluation_order_invariance_analytical():
-    import evaluate_agents_common as EAC
+    import shared.evaluate_agents_common as EAC
     controls = P4.build_analytical_controls()
     seeds = [225001, 225002, 225003]
     forward = {s: EAC.run_analytic_agent_episode("belief_weighted", controls, s)["full_objective"] for s in seeds}

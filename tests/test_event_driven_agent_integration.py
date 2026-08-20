@@ -36,9 +36,9 @@ from envs.event_driven_return_ppo_wrapper import (
     EventDrivenReturnPPOWrapper, DEFAULT_INVENTORY_SCALE, DEFAULT_RETURN_SCALE, DEFAULT_ELAPSED_TIME_SCALE,
 )
 from beliefs.event_time_hamilton_filter import EventTimeHamiltonFilter, stationary_distribution_from_generator
-import simulate_belief_weighted as SBW
-import evaluate_agents_event_driven as EAED
-from train_agents import RunningStats, build_train_env, build_eval_env
+import shared.simulate_belief_weighted as SBW
+import shared.evaluate_agents_event_driven as EAED
+from shared.train_agents import RunningStats, build_train_env, build_eval_env
 
 
 def make_filter(**overrides):
@@ -727,7 +727,7 @@ def test_save_reload_equality_event_driven(tmp_path):
 # ======================================================================
 def test_offline_selection_rejects_environment_type_mismatch(tmp_path, monkeypatch):
     import json
-    import select_checkpoint_offline as SCO
+    import shared.select_checkpoint_offline as SCO
 
     monkeypatch.setattr(SCO, "LOGS_DIR", tmp_path)
     manifest = dict(

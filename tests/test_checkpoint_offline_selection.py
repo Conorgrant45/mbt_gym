@@ -29,12 +29,12 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import DummyVecEnv
 from sb3_contrib import RecurrentPPO
 
-import train_agents
-from train_agents import (
+import shared.train_agents as train_agents
+from shared.train_agents import (
     compute_checkpoint_timesteps, candidate_checkpoint_path, save_candidate_checkpoint,
     hash_policy_state_dict, PeriodicEvalCallback, build_train_env,
 )
-import select_checkpoint_offline as SCO
+import shared.select_checkpoint_offline as SCO
 
 
 # ======================================================================
@@ -542,7 +542,7 @@ def test_recurrent_episode_results_independent_of_evaluation_order(lstm_checkpoi
 # evaluate_agents_common.py: offline_best loading (items 15, 16).
 # ======================================================================
 def test_evaluate_agents_common_resolves_and_loads_offline_best(ff_checkpoints, monkeypatch):
-    import evaluate_agents_common as EAC
+    import shared.evaluate_agents_common as EAC
 
     tmp_path = ff_checkpoints["tmp_path"]
     _run_offline_selection(tmp_path, "return_mlp_ppo", "offline_ff", learner_seed=3, env_seed=99,
@@ -584,7 +584,7 @@ def test_evaluate_agents_common_resolves_and_loads_offline_best(ff_checkpoints, 
 
 def test_load_offline_selection_metadata_missing_raises_not_silent_fallback(tmp_path, monkeypatch):
     """Item 16."""
-    import evaluate_agents_common as EAC
+    import shared.evaluate_agents_common as EAC
     monkeypatch.setattr(EAC, "LOGS_DIR", tmp_path / "logs")
     with pytest.raises(FileNotFoundError):
         EAC.load_offline_selection_metadata("return_mlp_ppo", "nonexistent_run_tag")
@@ -594,7 +594,7 @@ def test_check_all_models_exist_raises_for_missing_offline_best_file(tmp_path, m
     """Item 16, the other failure point: a resolved offline_best path that
     does not exist on disk must also raise (via the existing
     check_all_models_exist gate), not silently fall back."""
-    import evaluate_agents_common as EAC
+    import shared.evaluate_agents_common as EAC
     monkeypatch.setattr(EAC, "MODELS_DIR", tmp_path / "models")
     model_paths = {"return_mlp_ppo": EAC.resolve_model_path("return_mlp_ppo", "nope", "offline_best")}
     with pytest.raises(FileNotFoundError):

@@ -13,9 +13,9 @@ import pytest
 import torch
 from stable_baselines3 import PPO
 
-import phase5_common as P5
-from phase5_instrumented_ppo import InstrumentedPPO
-from phase5_critic_advantage_diagnostic import (
+import shared.phase5_common as P5
+from shared.phase5_instrumented_ppo import InstrumentedPPO
+from shared.phase5_critic_advantage_diagnostic import (
     collect_one_rollout_without_updating, recompute_gae_independently,
 )
 
@@ -168,7 +168,7 @@ def test_gae_recompute_matches_rollout_buffer(clone_net):
 # space (depth units, not raw normalised [-1,1] action units)
 # ======================================================================
 def test_action_surface_mse_uses_physical_depth_space():
-    import phase4_common as P4
+    import shared.phase4_common as P4
 
     class ConstantModel:
         """A fake model whose deterministic prediction is always the
@@ -219,7 +219,7 @@ def test_plain_ppo_train_is_not_monkeypatched_by_instrumented_ppo():
     shared PPO.train -- constructing an InstrumentedPPO must not affect a
     plain PPO instance's behaviour (Hamilton/return PPO training elsewhere
     in the project uses plain PPO/RecurrentPPO, untouched by this phase)."""
-    import phase4_common as P4
+    import shared.phase4_common as P4
     models = P4.verify_and_load_hamilton_models()
     plain_model = models[("event", 0)]["model"]
     assert type(plain_model).train is PPO.train

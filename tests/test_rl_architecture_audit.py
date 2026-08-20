@@ -25,8 +25,8 @@ import numpy as np
 from envs.make_envs import (
     make_regime_envs, N_STEPS, KAPPA, PER_STEP_INVENTORY_AVERSION, TERMINAL_INVENTORY_AVERSION, STEP_SIZE,
 )
-import simulate_belief_weighted as SBW
-import train_hamilton_ppo as THP
+import shared.simulate_belief_weighted as SBW
+import shared.train_hamilton_ppo as THP
 
 
 # ======================================================================

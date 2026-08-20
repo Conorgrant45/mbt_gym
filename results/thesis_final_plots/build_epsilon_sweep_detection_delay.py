@@ -38,6 +38,13 @@ summary JSON (Brier score and delay stats per epsilon).
 Run from repo root:
     python results/thesis_final_plots/build_epsilon_sweep_detection_delay.py
 """
+import sys as _sys
+from pathlib import Path as _Path
+_REPO_ROOT = _Path(__file__).resolve().parent.parent.parent
+if str(_REPO_ROOT) not in _sys.path:
+    _sys.path.insert(0, str(_REPO_ROOT))
+del _sys, _Path, _REPO_ROOT
+
 import time
 
 import numpy as np
@@ -47,8 +54,8 @@ import fig_style as FS
 from envs.event_driven_regime_env import EventDrivenRegimeSwitchingEnv
 from envs.make_envs import EPSILON, INITIAL_PRICE, R0_VOLATILITY_PCT, R1_VOLATILITY_PCT, LAMBDA, TRANSITION_GENERATOR
 from beliefs.event_time_hamilton_filter import EventTimeHamiltonFilter
-import phase7_post_training_common as P7PC
-import final_common as FC
+import phase7_post_training.phase7_post_training_common as P7PC
+import final.final_common as FC
 
 # ======================================================================
 # CONFIGURATION

@@ -27,11 +27,11 @@ Run from repo root:
 import numpy as np
 import pytest
 
-import ips_common as IC
-import ips_episode_runner as ER
-import final_common as FC
-import phase4_common as P4
-import simulate_belief_weighted as SBW
+import ips.ips_common as IC
+import ips.ips_episode_runner as ER
+import final.final_common as FC
+import shared.phase4_common as P4
+import shared.simulate_belief_weighted as SBW
 from envs.event_driven_regime_env import EventDrivenRegimeSwitchingEnv
 
 

@@ -15,8 +15,8 @@ import pytest
 import torch
 from stable_baselines3 import PPO
 
-import phase5_common as P5
-import phase6_common as P6
+import shared.phase5_common as P5
+import shared.phase6_common as P6
 
 
 @pytest.fixture(scope="module")

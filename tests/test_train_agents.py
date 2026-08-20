@@ -26,8 +26,8 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import DummyVecEnv
 from sb3_contrib import RecurrentPPO
 
-import train_agents
-from train_agents import (
+import shared.train_agents as train_agents
+from shared.train_agents import (
     rollout_spans_full_episode, AGENT_TYPES, RECURRENT_AGENT_TYPES,
     PeriodicEvalCallback, build_train_env,
 )

@@ -19,9 +19,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import phase7_common as P7
-import phase7_post_training_common as PC
-from phase7_evaluate_unseen_holdout import paired_contrast, bootstrap_ci
+import shared.phase7_common as P7
+import phase7_post_training.phase7_post_training_common as PC
+from phase7_post_training.phase7_evaluate_unseen_holdout import paired_contrast, bootstrap_ci
 
 
 def _hash_file(path: Path) -> str:

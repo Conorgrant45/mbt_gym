@@ -39,7 +39,7 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 from envs.make_envs import make_regime_envs
 from envs.hamilton_ppo_wrapper import HamiltonPPOWrapper
 from envs.return_ppo_wrapper import ReturnPPOWrapper, DEFAULT_RETURN_SCALE
-from train_agents import PeriodicEvalCallback, build_train_env, evaluate_policy
+from shared.train_agents import PeriodicEvalCallback, build_train_env, evaluate_policy
 
 
 # ======================================================================

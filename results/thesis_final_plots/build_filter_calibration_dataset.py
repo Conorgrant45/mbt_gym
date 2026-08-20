@@ -29,16 +29,23 @@ FIGURES_REPORT.md). Run manually:
 
     python build_filter_calibration_dataset.py
 """
+import sys as _sys
+from pathlib import Path as _Path
+_REPO_ROOT = _Path(__file__).resolve().parent.parent.parent
+if str(_REPO_ROOT) not in _sys.path:
+    _sys.path.insert(0, str(_REPO_ROOT))
+del _sys, _Path, _REPO_ROOT
+
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 import fig_style as FS
-from evaluate_agents_event_driven import make_event_time_filter
+from shared.evaluate_agents_event_driven import make_event_time_filter
 from envs.event_driven_regime_env import EventDrivenRegimeSwitchingEnv
-import final_common as FC
-import phase7_post_training_common as P7PC
+import final.final_common as FC
+import phase7_post_training.phase7_post_training_common as P7PC
 
 # ======================================================================
 # CONFIGURATION

@@ -21,7 +21,7 @@ import pytest
 from stable_baselines3 import PPO
 from sb3_contrib import RecurrentPPO
 
-import evaluate_agents_common as EAC
+import shared.evaluate_agents_common as EAC
 from envs.hamilton_ppo_wrapper import HamiltonPPOWrapper
 from envs.return_ppo_wrapper import ReturnPPOWrapper
 
@@ -45,7 +45,7 @@ TEST_SEED = 120500  # disjoint from DEFAULT_HOLDOUT_SEEDS (120000-120099) and ev
 # ======================================================================
 class TestWrapperSelection:
     def test_hamilton_ppo_uses_hamilton_wrapper(self, monkeypatch):
-        import hamilton_ppo_eval_lib as HEL
+        import shared.hamilton_ppo_eval_lib as HEL
         calls = []
         original_init = HamiltonPPOWrapper.__init__
 
@@ -210,7 +210,7 @@ class TestEpisodeLengthFinitenessReconciliation:
 
     def test_analytic_agent_episode(self):
         controls = {}
-        import simulate_belief_weighted as SBW
+        import shared.simulate_belief_weighted as SBW
         for regime, params in SBW.REGIME_PARAMS.items():
             da, db, qag, qbg = SBW.build_optimal_control(**params)
             controls[regime] = {"delta_ask": da, "delta_bid": db, "q_ask": qag, "q_bid": qbg}
@@ -229,7 +229,7 @@ class TestEpisodeLengthFinitenessReconciliation:
 # ======================================================================
 def test_build_row_matches_schema_columns():
     controls = {}
-    import simulate_belief_weighted as SBW
+    import shared.simulate_belief_weighted as SBW
     for regime, params in SBW.REGIME_PARAMS.items():
         da, db, qag, qbg = SBW.build_optimal_control(**params)
         controls[regime] = {"delta_ask": da, "delta_bid": db, "q_ask": qag, "q_bid": qbg}
@@ -288,7 +288,7 @@ class TestNoRegimeLeakageInHarness:
         assert all(s == (3,) for s in captured_shapes)
 
     def test_hamilton_ppo_obs_shape_has_no_regime_slot(self, monkeypatch):
-        import hamilton_ppo_eval_lib as HEL
+        import shared.hamilton_ppo_eval_lib as HEL
         model = PPO.load(str(HAMILTON_MODEL))
         captured_shapes = []
         original_predict = model.predict
@@ -309,7 +309,7 @@ class TestNoRegimeLeakageInHarness:
 class TestAnalyticReproducibility:
     def test_same_seed_same_policy_reproducible(self):
         controls = {}
-        import simulate_belief_weighted as SBW
+        import shared.simulate_belief_weighted as SBW
         for regime, params in SBW.REGIME_PARAMS.items():
             da, db, qag, qbg = SBW.build_optimal_control(**params)
             controls[regime] = {"delta_ask": da, "delta_bid": db, "q_ask": qag, "q_bid": qbg}
@@ -320,7 +320,7 @@ class TestAnalyticReproducibility:
 
     def test_fidelity_vs_validated_original(self):
         controls = {}
-        import simulate_belief_weighted as SBW
+        import shared.simulate_belief_weighted as SBW
         for regime, params in SBW.REGIME_PARAMS.items():
             da, db, qag, qbg = SBW.build_optimal_control(**params)
             controls[regime] = {"delta_ask": da, "delta_bid": db, "q_ask": qag, "q_bid": qbg}

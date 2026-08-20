@@ -18,7 +18,7 @@ from envs.event_driven_regime_env import (
     denormalise_depth,
 )
 from envs.make_envs import TRANSITION_GENERATOR, KAPPA, EPSILON, LAMBDA, TERMINAL_TIME
-import simulate_belief_weighted as SBW
+import shared.simulate_belief_weighted as SBW
 
 
 def make_env(seed=0, **kwargs):

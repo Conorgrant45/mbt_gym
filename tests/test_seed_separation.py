@@ -47,8 +47,8 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3.common.vec_env import DummyVecEnv
 
-import train_agents
-from train_agents import resolve_seeds, build_train_env, PeriodicEvalCallback, evaluate_policy
+import shared.train_agents as train_agents
+from shared.train_agents import resolve_seeds, build_train_env, PeriodicEvalCallback, evaluate_policy
 
 
 def _ns(**kw):
@@ -342,7 +342,7 @@ def test_both_seeds_recorded_in_config_summary_and_csvs(tmp_path, monkeypatch):
 # means the learner seed; training_env_seed is a new, separate column.
 # ======================================================================
 def test_evaluate_agents_common_training_env_seed_column():
-    import evaluate_agents_common as EAC
+    import shared.evaluate_agents_common as EAC
 
     m = dict(
         evaluation_seed=1, raw_pnl=0.0, full_objective=0.0, spread_revenue=0.0,

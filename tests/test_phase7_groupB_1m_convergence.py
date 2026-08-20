@@ -14,10 +14,10 @@ import numpy as np
 import pytest
 import torch
 
-import phase5_common as P5
-import phase6_common as P6
-import phase7_common as P7
-from phase7_instrumented_ppo import Phase7InstrumentedPPO
+import shared.phase5_common as P5
+import shared.phase6_common as P6
+import shared.phase7_common as P7
+from shared.phase7_instrumented_ppo import Phase7InstrumentedPPO
 
 
 # ======================================================================
@@ -174,8 +174,8 @@ def test_raw_buffer_actions_are_unclipped_pre_env_step():
     verified structurally (buffer values need not lie in [-1,1] at all,
     unlike model.predict()'s always-clipped return), not by hoping a
     low-variance sample happens to exceed the bound."""
-    from phase5_critic_advantage_diagnostic import collect_one_rollout_without_updating
-    from phase7_instrumented_ppo import Phase7InstrumentedPPO as _P7PPO
+    from shared.phase5_critic_advantage_diagnostic import collect_one_rollout_without_updating
+    from shared.phase7_instrumented_ppo import Phase7InstrumentedPPO as _P7PPO
     instrumented, _ = P7.build_group_b_model(learner_seed=1, model_cls=_P7PPO)
     buffer = collect_one_rollout_without_updating(instrumented)
     raw_actions = buffer.actions.reshape(-1, 2)

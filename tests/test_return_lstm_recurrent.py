@@ -161,7 +161,7 @@ class TestStatePropagation:
 def test_episode_start_flag_true_only_at_episode_start(monkeypatch):
     """Items 23-24: replicate the eval loop in train_agents.run_eval_episode
     and record every episode_start value actually passed to model.predict()."""
-    from train_agents import run_eval_episode
+    from shared.train_agents import run_eval_episode
 
     model, _ = build_untrained_model(seed=5)
     env = make_env(seed=5)

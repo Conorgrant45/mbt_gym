@@ -26,7 +26,7 @@ from sb3_contrib import RecurrentPPO
 from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.monitor import Monitor
 
-import evaluate_agents_common as EAC
+import shared.evaluate_agents_common as EAC
 from envs.return_ppo_wrapper import ReturnPPOWrapper
 
 

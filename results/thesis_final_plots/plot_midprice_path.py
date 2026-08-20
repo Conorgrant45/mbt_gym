@@ -35,6 +35,13 @@ policy or reward, only the exogenous price path, so no leakage concern).
 Run from repo root:
     python results/thesis_final_plots/plot_midprice_path.py
 """
+import sys as _sys
+from pathlib import Path as _Path
+_REPO_ROOT = _Path(__file__).resolve().parent.parent.parent
+if str(_REPO_ROOT) not in _sys.path:
+    _sys.path.insert(0, str(_REPO_ROOT))
+del _sys, _Path, _REPO_ROOT
+
 import numpy as np
 from matplotlib.patches import Patch
 
