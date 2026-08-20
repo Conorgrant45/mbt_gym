@@ -1,0 +1,14 @@
+{
+  "figure": "fig06_trajectory_mechanism_high_penalty",
+  "path_seed": 290000,
+  "learner_seed": 0,
+  "checkpoint": 1000000,
+  "penalty_calibration": "high_penalty",
+  "phi": 0.1,
+  "alpha": 0.01,
+  "n_events": 290,
+  "n_regime_switches": 10,
+  "n_bid_fills": 41,
+  "n_ask_fills": 22,
+  "note": "Illustrative single-episode mechanism figure (n=1 path) under the higher-penalty calibration, same exogenous path (path_seed=290000) as fig06_trajectory_mechanism.py for direct comparison. Not a statistically powered result."
+}
